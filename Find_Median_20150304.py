@@ -28,3 +28,4 @@ def median(data):
     return data[half] if len(data)%2!=0 else (data[half-1]+data[half])/2
 
 '''
+'Very interesting...'
