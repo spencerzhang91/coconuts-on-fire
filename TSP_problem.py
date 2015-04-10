@@ -48,7 +48,7 @@ def distance(A, B):
     The distance between two points.'''
     return abs(A-B)
 
-def Cities(n, width=900, height=600, seed=99):
+def Cities(n, width=1800, height=1200, seed=99):
     '''
     Make a set of n cities, each with random coordinates within a (w x h)
     rectangle.'''
