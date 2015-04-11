@@ -7,7 +7,14 @@ import itertools
 import urllib
 import csv
 
+<<<<<<< HEAD
+# file_xy是景点经纬度的csv文件，file_value是景点热度的csv文件
+file_xy = open(r'J:\四会多规合一\四会景点坐标.csv')
+file_value = open(r'J:\四会多规合一\四会景点热度.csv')
+file_back = open(r'J:\四会多规合一\四会景点坐标back.csv')
+=======
 file = open(r'E:\SkyDrive\近期\relics.csv')
+>>>>>>> ff4c1fe4d21994e0803cc53087a4ea15874fb379
 
 def alltours(cities):
     '''Return a list of tours, each a permutation of cities, but each one starting
@@ -41,6 +48,52 @@ def Cities(csv):
         assembly.append(coor)    
     return frozenset(assembly)
 
+<<<<<<< HEAD
+def nodes_reader(file):
+    '''
+    A function to drag out x and y coordinates from a csv file
+    (n row 2 col) and convert them into complex numbers and store
+    into a frozen set. It's extended to work with more than 2 colums
+    and can omit empty rows.
+    '''
+    assembly = []
+    readerxy = csv.reader(file, delimiter=',', skipinitialspace=True)
+    filter_num = first_n(file_value)#Attention value below this will be omited.
+    print('firstn:', filter_num)
+    for row in readerxy:
+        if row[0] != '':
+            latitude = float(row[1])# latitude as Y coordinate
+            longitude = float(row[2])# longitude as X coordinate
+            coor = complex(longitude, latitude)
+            if float(row[3]) >= filter_num:
+                assembly.append(coor)
+    print('length:', len(assembly))
+    return frozenset(assembly)
+
+
+def all_points_plot(file):
+    reader_all = csv.reader(file, delimiter=',', skipinitialspace=True)
+    x_all = []
+    y_all = []
+    for row in reader_all:
+        if row[0] != '':
+            y_all.append(float(row[1]))# latitude as Y coordinate
+            x_all.append(float(row[2]))# longitude as X coordinate
+    return (x_all, y_all)
+    
+    
+
+def first_n(file):
+    value_list = []
+    readerv = csv.reader(file, delimiter=',', skipinitialspace=True)
+    for row in readerv:
+        if row[1] != 0:
+            value_list.append(float(row[1]))
+    value_list.sort()
+    n = 20
+    #The n here represents how many points you want to include in the tour.
+    return value_list[(len(value_list)-1)-n]
+=======
 
 
 def Cities_selected(csv):
@@ -57,6 +110,7 @@ def selector(assembly):
     above(Cities)
     '''
     pass
+>>>>>>> ff4c1fe4d21994e0803cc53087a4ea15874fb379
 
 
 
@@ -178,18 +232,44 @@ def distance(A, B):
     return abs(A-B)
 
 
+<<<<<<< HEAD
+
+def plot_all_points(allpoints, style='go'):
+    '''
+    To plot all points which are potentially visitable.
+    Also as an object of reference to make the route meaningful and easy to see.
+    '''
+    plt.plot(list(map(X, points)), list(map(Y, points)), style)
+    plt.show()
+
+
+
+=======
+>>>>>>> ff4c1fe4d21994e0803cc53087a4ea15874fb379
 def plot_tour(tour):
     '''
     Plot the cities as circles and the tour as lines between them.'''
     start = tour[0]
     plot_lines(list(tour) + [tour[0]])
     plot_lines([start], 'rs') # mark the start city with a red square
+<<<<<<< HEAD
+    
+=======
+>>>>>>> ff4c1fe4d21994e0803cc53087a4ea15874fb379
 
 
 def plot_lines(points, style='bo-'):
     '''
     Plot lines to connect a series of points.
     '''    
+<<<<<<< HEAD
+    
+    # The line below presents the Background points, which is to say, some of them is
+    # not included in a tour.
+    back = all_points_plot(file_back)
+    plt.plot(back[0], back[1], 'go')
+=======
+>>>>>>> ff4c1fe4d21994e0803cc53087a4ea15874fb379
     plt.plot(list(map(X, points)), list(map(Y, points)), style)
     plt.axis('scaled');plt.axis('off')
     
@@ -204,6 +284,10 @@ def plot_tsp(algorithm, cities):
     t1 = time.clock()
     assert valid_tour(tour, cities)
     plot_tour(tour)
+<<<<<<< HEAD
+    
+=======
+>>>>>>> ff4c1fe4d21994e0803cc53087a4ea15874fb379
     plt.show()
     print('{} city tour with length {:.1f} in {:.3f} secs for {}'.format(\
         len(tour), tour_length(tour), t1-t0, algorithm.__name__))
@@ -221,11 +305,26 @@ def length_ratio(cities):
 
 
 
+<<<<<<< HEAD
+res = nodes_reader(file_xy)
+rep = repeated_nn_tsp(res)
+alt = altered_nn_tsp(res)
+rpalt = repeated_altered_nn_tsp(res, repetitions = 300)
+=======
 res = Cities(file)
 rep = repeated_nn_tsp(res)
 alt = altered_nn_tsp(res)
 rpalt = repeated_altered_nn_tsp(res, repetitions = 100)
+>>>>>>> ff4c1fe4d21994e0803cc53087a4ea15874fb379
 
 # print(rpalt)
 print(len(rpalt))
 plot_tsp(repeated_altered_nn_tsp, res)
+<<<<<<< HEAD
+
+
+plt.show()
+a = all_points_plot(file_xy)
+print(a)
+=======
+>>>>>>> ff4c1fe4d21994e0803cc53087a4ea15874fb379
