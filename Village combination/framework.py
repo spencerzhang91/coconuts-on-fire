@@ -37,6 +37,7 @@ class Center_Village:
         k = 0.004
         p = 0.5
         q = 0.5
+        # need more work here
         self.mass = 1
         return self.mass
 
@@ -268,6 +269,7 @@ def draw_line(H, C, L):
             
 # self test
 if __name__ == '__main__':
+    t1 = time.time()
     H = pick_lines(keyword='H')
     C = pick_lines(keyword='C')
     L = pick_lines(keyword='L')
@@ -277,8 +279,12 @@ if __name__ == '__main__':
     print('L', len(L))
 
     draw_line(H, C, L)
-    draw_background()  
+    draw_background()
+    t2 = time.time()
     plt.show()
+    
+    t = t2-t1
+    print(t)
     
 
 

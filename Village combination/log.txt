@@ -1,0 +1,2 @@
+The two diagrams show how should this work. Unforturenately, there's something wrong.
+You will know where went wrong when you run this program yourselves.
