@@ -1,4 +1,8 @@
-class Person:
+from classtools import AttrDisplay
+class Person(AttrDisplay):
+    '''
+    Create and process person records
+    '''
     def __init__(self, name, job=None, pay=0):
         self.name = name
         self.job = job
@@ -9,9 +13,6 @@ class Person:
 
     def giveRaise(self, percent):
         self.pay = int(self.pay *(1 + percent))
-
-    def __repr__(self):
-        return '[%s: %s]' % (self.__class__.__name__, self.pay)
 
 
 class Manager(Person):
@@ -39,11 +40,12 @@ class Department:
 
 
 
-bob = Person('Bob Smith')
-sue = Person('Sue Jones', job='dev', pay=100000)
-tom = Manager('Tom Jones', pay=50000)
+
 
 if __name__ == '__main__':
+    bob = Person('Bob Smith')
+    sue = Person('Sue Jones', job='dev', pay=100000)
+    tom = Manager('Tom Jones', pay=50000)
     
     development = Department(bob, sue)
     development.addMember(tom)
