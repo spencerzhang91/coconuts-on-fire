@@ -1,11 +1,12 @@
 #! needed libraries
+from classtools import AttrDisplay
 import matplotlib.pyplot as plt
 import time
 import csv
 
 
 # define two main classes this petit program will use later.
-class Center_Village:
+class Center_Village(AttrDisplay):
     '''
     This class defines center village which creates center village instance.
     '''
@@ -180,7 +181,7 @@ def draw_background():
         h = Hollow_Village(*args)
         h.mass_calculate()
         hollow_list.append(h.cord)
-    # print(hollow_list)
+        
 
     centers = data_reader(cent, 'C')
     center_list = []
