@@ -1,4 +1,5 @@
 from classtools import AttrDisplay
+
 class Person(AttrDisplay):
     '''
     Create and process person records
