@@ -1,12 +1,11 @@
 #! needed libraries
-from classtools import AttrDisplay
 import matplotlib.pyplot as plt
 import time
 import csv
 
 
 # define two main classes this petit program will use later.
-class Center_Village(AttrDisplay):
+class Center_Village:
     '''
     This class defines center village which creates center village instance.
     '''
@@ -80,8 +79,8 @@ def opener():
     Control the outer file IO when the draw method starts: open file.
     '''
     global data, cent
-    data = open(r'J:\中心村归并算法\village_H.csv')
-    cent = open(r'J:\中心村归并算法\village_C.csv')
+    data = open(r'D:\GITHUB\coconuts-on-fire\Village combination\village_H.csv')
+    cent = open(r'D:\GITHUB\coconuts-on-fire\Village combination\village_C.csv')
 
     
 
