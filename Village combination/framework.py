@@ -237,6 +237,7 @@ def pick_lines(keyword: 'H, C or L' = "L"):
                 temp = min(record)
                 linelist.append(temp)               
     closer()
+    print(len(linelist))
     if flag == 'L':
         out = linelist
     elif flag == 'H':
