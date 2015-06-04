@@ -62,7 +62,7 @@ def opener():
     Control the outer file IO when the draw method starts: open file
     '''
     global data
-    data = open(r'J:\VillageMerger\Data\villages.csv')
+    data = open(r'D:\GITHUB\coconuts-on-fire\VillageMerger\Data\villages.csv')
     
 
 def closer():
@@ -258,8 +258,8 @@ if __name__ == '__main__':
     t2 = time.time()
     plt.show()
     
-    t = t2-t1
-    print(t)
+    ts = t2-t1
+    print(ts)
     
 
 
