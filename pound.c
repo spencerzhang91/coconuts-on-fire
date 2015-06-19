@@ -1,4 +1,4 @@
-/* pound.c -- define a function with attribute */
+/* pound.c -- define a function with argument */
 #include <stdio.h>
 void pound(int n);
 int main(void)
