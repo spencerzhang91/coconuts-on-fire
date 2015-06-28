@@ -12,3 +12,5 @@ class Squares:
 if __name__ == '__main__':
     for i in Squares(1,5):
         print(i, end=' ')
+
+    
