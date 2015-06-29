@@ -24,10 +24,12 @@ class Iters:
     def __contains__(self, x):
         print('contains: ', end=' ')
         return x in self.data
+        
 
 if __name__ == '__main__':
     X = Iters([1,2,3,4,5])
-    print(3 in X)
+    print(6 in X)
+    '''
     for i in X:
         print(i, end=' | ')
 
@@ -41,3 +43,4 @@ if __name__ == '__main__':
             print(next(I), end=' @ ')
         except StopIteration:
             break
+'''
