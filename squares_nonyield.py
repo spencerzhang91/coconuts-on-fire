@@ -1,12 +1,17 @@
-# file squares.py
+# file squares_nonyield.py
 
 class Squares:
     def __init__(self, start, stop):
-        self.value = start - 1
+        self.start = start
         self.stop = stop
 
     def __iter__(self):
-        return self
+        return SquareIter(self.start, self.stop)
+
+class SquareIter:
+    def __init__(self, start, stop):
+        self.value = start - 1
+        self.stop = stop
 
     def __next__(self):
         if self.value == self.stop:
@@ -16,7 +21,8 @@ class Squares:
 
 if __name__ == '__main__':
     S = Squares(1,5)
-    Q = Squares(1,5)
     for i in S:
-        for j in Q:
+        for j in S:
             print("%s:%s" % (i,j), end=' ')
+
+            

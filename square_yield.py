@@ -10,7 +10,7 @@ class Squares:
             yield value ** 2
 
 if __name__ == '__main__':
-    for i in Squares(1,5):
-        print(i, end=' ')
-
-    
+    S = Squares(1,5)
+    for i in S:
+        for j in S:
+            print("%s:%s" % (i,j), end=' ')
