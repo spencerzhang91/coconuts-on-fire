@@ -7,12 +7,11 @@ int main(void)
 	int status;
 	
 	printf("Please enter an integer to be summed. (q to quit):");
-	status = scanf("%ld", &num);
-	while (status == 1)
+	
+	while (scanf("%ld", &num) == 1)
 	{
 		sum = sum + num;
 		printf("Please enter an integer to be summed. (q to quit):");
-		status = scanf("%d", &num);
 	}
 	printf("Those integers sum to %ld.\n", sum);
 	return 0;
