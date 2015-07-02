@@ -23,11 +23,8 @@ int main(void)
 double power(double n, int p)
 {
 	double pow = 1;
-	int i;
-	
+	int i;	
 	for (i=1; i<=p; i++)
-	{
 		pow *= n;
-	}
 	return pow;
 }
