@@ -27,17 +27,44 @@ class Commuter3:
         self.value = val
 
     def __add__(self, other):
-        print('add#3', self.value + other)
+        print('add#3', self.value, other)
         return self.value + other
 
     def __radd__(self, other):
         return self + other
 
+class Commuter4:
+    def __init__(self, val):
+        self.value = val
+
+    def __add__(self, other):
+        print("add#4", self.value, other)
+        return self.value + other
+    # In fact, there's no need to define a __radd__, just share existing __add__ would do:
+    __radd__ = __add__ 
+
+class Commuter5:
+    def __init__(self, val):
+        self.value = val
+
+    def __add__(self, other):
+        if isinstance(other, Commuter5):
+            other = other.value
+        return Commuter5(self.value + other)
+
+    def __radd__(self, other):
+        return self.__add__(other)
+
+    def __str__(self):
+        return '<Commuter5: %s>' % self.value
+
 
 
 if __name__ == "__main__":
-    x = Commuter1(10)
-    y = Commuter1(88)
-    #
-    print(x + 5)
-    print(5 + y)
+    for klass in (Commuter1, Commuter2, Commuter3, Commuter4, Commuter5):
+        print('-'*60)
+        x = klass(88)
+        y = klass(99)
+        print(x + 1)
+        print(1 + y)
+        print(x + y)
