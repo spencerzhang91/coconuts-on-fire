@@ -58,10 +58,19 @@ class Commuter5:
     def __str__(self):
         return '<Commuter5: %s>' % self.value
 
+# to find out why 3 is equivalent to 2
+class Commuter6:
+    def __init__(self, val):
+        self.value = val
 
+    def __add__(self, other):
+        print("add#6", self.value, other)
+        return self
+
+    __radd__ = __add__
 
 if __name__ == "__main__":
-    for klass in (Commuter1, Commuter2, Commuter3, Commuter4, Commuter5):
+    for klass in (Commuter1, Commuter2, Commuter3, Commuter4, Commuter5, Commuter6):
         print('-'*60)
         x = klass(88)
         y = klass(99)
