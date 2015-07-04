@@ -11,8 +11,13 @@ int main(void)
 	printf("Enter q to quit.\n");
 	while (scanf("%lu", &num) == 1)
 	{
-		for (div=2, isPrime=true; div * div <= num; div++)
+		/* isPrime = true; ......[1]
+		Notice that the "isPrime = true" statement after comma is 
+		the some as put it at [1], rather than in [2]
+		*/
+		for (div=2, isPrime = true; div * div <= num; div++)
 		{
+			//isPrime = true; ......[2]
 			if (num % div == 0)
 			{
 				if ((div * div) != num)
