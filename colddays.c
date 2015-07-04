@@ -18,7 +18,7 @@ int main(void)
 	if (all_days != 0)
 		printf("%d days total: %.1f%% were below freezing.\n",
 				all_days, 100.0*(float)cold_days / all_days);
-	if (all_days == 0)
+	else
 		printf("No data entered!\n");
 	return 0;
 }
