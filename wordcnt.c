@@ -14,4 +14,25 @@ int main(void)
 	bool inword = false;        // if c is in a word, then inword is set true
 	
 	printf("Enter text to be analyzed(| to terminate): \n");
+	prev = '\n';                // used to recoganize complete lines
+	while ((c=getchar()) != STOP)
+	{
+		n_chars++;              // count characters
+		if (c == '\n')
+			n_lines++;			// count lines
+		if (!isspace(c) && !inword)
+		{
+			inword = true;      // start a new word
+			n_words++;          // count words
+		}
+		if (isspace(c) && inword)
+			inword = false;     // to the end of a word
+		prev = c;               // preserve the character		
+	}
+	if (prev != '\n')
+		p_lines = 1;   			// count partial line (which could at most one)
+	printf("characters = %ld, words = %d, lines = %d, ",
+			n_chars, n_words, n_lines);
+	printf("partial lines = %d\n", p_lines);
+	return 0;
 }
