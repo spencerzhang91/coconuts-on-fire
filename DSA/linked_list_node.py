@@ -21,21 +21,24 @@ def unorderedSearch(head, target):
     return curNode is not None
     
 
+head = ListNode('A')
+n1 = ListNode('B')
+n2 = ListNode('C')
+n3 = ListNode('D')
+# connect the nodes
+head.next = n1
+n1.next = n2
+n2.next = n3
+# traverse(head)
 
-a = ListNode(1)
-b = ListNode(2)
-c = ListNode(3)
-d = ListNode(4)
-e = ListNode(5)
-f = None
+def reverse(head):
+    prev = None
+    while head:
+        curr = head
+        head = head.next
+        curr.next = prev
+        prev = curr
+        print('->', prev, curr, head)
+    return prev
 
-a.next = b
-b.next = c
-c.next = d
-d.next = e
-
-b = c = d = e = None
-#print(a)
-
-traverse(a)
-print(unorderedSearch(a, 3))
+reverse(head)
