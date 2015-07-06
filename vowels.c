@@ -7,7 +7,7 @@ int main(void)
 	a_ct = e_ct = i_ct = o_ct = u_ct = 0;
 	
 	printf("Enter some text, enter # to quit.\n");
-	while (scanf("%c", &ch) == 1, ch != '#')
+	while (scanf("%c", &ch) == 1, ch != '#') // This form is equivelent to: while((scanf("%c",&ch) == 1) && ch != '#')
 	{
 		switch (ch)
 		{
