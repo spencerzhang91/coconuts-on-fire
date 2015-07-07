@@ -54,14 +54,31 @@ def reverse_rec(head):
     curr.next = head
     return new_head
 
+def reverse_2b(head):
+    rec = []
+    while head:
+        rec.append(head.val)
+        head = head.next
+    if rec:
+        new_head = ListNode(rec[-1])
+        curr = new_head
+        for i in range(len(rec)-1):
+            curr.next = ListNode(rec[-2-i])
+            curr = curr.next
+        traverse(new_head)
+    return None
+
 if __name__ == '__main__':
+    nn = None
+    no = ListNode('a')
     n0 = ListNode('A')
     n1 = ListNode('B')
-    #n2 = ListNode('C')
-    #n3 = ListNode('D')
-    n0.next = n1
-    print(reverse(n0))
-    print(reverse_rec(n0))
+    n2 = ListNode('C')
+    n3 = ListNode('D')
+    n0.next = n1; n1.next = n2; n2.next = n3
+    #print(reverse(n0))
+    #print(reverse_rec(n0))
+    reverse_2b(n0)
 
     
     
