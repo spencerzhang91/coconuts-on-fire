@@ -40,19 +40,30 @@ def reverse(head):
         head = head.next
         curr.next = prev
         prev = curr
-        print('->', prev, curr, head)
-    return prev    
+    return prev
+
+
+def reverse_rec(head):
+    if not head:
+        return None
+    if not head.next:
+        return head
+    curr = head.next
+    new_head = reverse_rec(curr)
+    head.next = None
+    curr.next = head
+    return new_head
 
 if __name__ == '__main__':
-    head = ListNode('A')
+    n0 = ListNode('A')
     n1 = ListNode('B')
-    n2 = ListNode('C')
-    n3 = ListNode('D')
-    # connect the nodes
-    head.next = n1
-    n1.next = n2
-    n2.next = n3
-    # traverse(head)
-    # reverse(head)
-    removeNode(head, n2.val)
-    traverse(head)
+    #n2 = ListNode('C')
+    #n3 = ListNode('D')
+    n0.next = n1
+    print(reverse(n0))
+    print(reverse_rec(n0))
+
+    
+    
+    
+    
