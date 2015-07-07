@@ -1,5 +1,7 @@
 # a linked list(here the singly linked list) must have a head reference(pointer), otherwise it would
 # be impossible to locate the head or any other node.
+from time import time
+
 class ListNode:
     def __init__(self, x):
         self.val = x
@@ -54,6 +56,7 @@ def reverse_rec(head):
     curr.next = head
     return new_head
 
+
 def reverse_2b(head):
     rec = []
     while head:
@@ -65,8 +68,15 @@ def reverse_2b(head):
         for i in range(len(rec)-1):
             curr.next = ListNode(rec[-2-i])
             curr = curr.next
-        traverse(new_head)
     return None
+
+def run(func, loops, *args, **kargs):
+    t0 = time()
+    for i in range(loops):
+        func(*args, **kargs)
+    t1 = time()
+    return t1 - t0
+        
 
 if __name__ == '__main__':
     nn = None
@@ -76,9 +86,11 @@ if __name__ == '__main__':
     n2 = ListNode('C')
     n3 = ListNode('D')
     n0.next = n1; n1.next = n2; n2.next = n3
-    #print(reverse(n0))
-    #print(reverse_rec(n0))
-    reverse_2b(n0)
+
+    time1 = run(reverse, 1000000, n0)
+    time2 = run(reverse_rec, 1000000, n0)
+    time3 = run(reverse_2b, 1000000, n0)
+    print("reverse: %.6f  reverse_rec: %.6f  reverse_2b: %.6f" % (time1, time2, time3))
 
     
     
