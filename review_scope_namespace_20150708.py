@@ -1,9 +1,9 @@
 class Alter1:
     def half(self, array, k):
         print('A1: before:', array)
-        # array = array[k:] + array[:k]
-        temp = array[2:3]
-        array = temp
+        array = array[k:] + array[:k]
+        
+        
         print('A1: after:', array, '\n')
         
 
