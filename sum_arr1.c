@@ -17,7 +17,7 @@ int sum(int ar[], int n)
 	int i;
 	int total = 0;
 	for (i = 0; i < n; i++)
-		total += ar[i]; // the same as ar[i];
+		total += ar[i]; // the same as *ar;
 	printf("The size of ar is %u bytes.\n", sizeof ar);
 	return total;
 }
