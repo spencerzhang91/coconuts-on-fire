@@ -1,8 +1,16 @@
 # python implemented queue ADT
+# A new exception class defined for handling empty errors
+
+class Empty(Exception):
+    '''
+    Error attempting to access an element from an empty container.
+    '''
+    pass
+
 class ArrayQueue:
     '''FIFO queue implementation using a python list as underlying storage.'''
-    DEFAULT_CAPACITY = 10  # moderate capacity for all new queues
-
+    DEFAULT_CAPACITY = 10                                   # moderate capacity for all
+                                                            # new queues
     def __init__(self):
         '''Create an empty queue.'''
         self._data = [None] * ArrayQueue.DEFAULT_CAPACITY
@@ -36,12 +44,12 @@ class ArrayQueue:
         self._size -= 1
         if 0 < self._size < len(self._data)//4:
             self._resize(len(self._data)//2)                # shrink list by 1/2 after
-        return answer
-                                                            # dequeue if shorter than 1/4
+        return answer                                       # dequeue if shorter than 1/4
+                                                            
     def enqueue(self, e):
         '''Add an element to the back of queue.'''
         if self._size == len(self._data):
-            self.resize(2 * len(self._data))                # double the array size
+            self._resize(2 * len(self._data))               # double the array size
         avail = (self._front +self._size) % len(self._data)
                                                             # self._size is current element
                                                             # number (before enqueue)
@@ -57,7 +65,7 @@ class ArrayQueue:
             self._data[k] = old[walk]
             walk = (1 + walk) % len(old)
         self._front = 0                                     # self._front realigned
-            
+        
         
 
     
