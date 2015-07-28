@@ -14,7 +14,7 @@ class Deque:
     DEFAULT_CAPACITY = 10
     def __init__(self):
         '''Create empty deque.'''
-        self._data = [None] * DEFAULT_CAPACITY
+        self._data = [None] * self.DEFAULT_CAPACITY
         self._size = 0
         self._front = 0
         self._back = 0
@@ -39,7 +39,7 @@ class Deque:
     Raise Empty exception if the deque is empty.'''
         if self.is_empty():
             raise Empty('Deque is empty')
-        self._back = (self._front + self._size - 1) % len(self._data)
+        # self._back = (self._front + self._size - 1) % len(self._data)
         return self._data[self._back]
 
     def add_first(self, e):
@@ -89,13 +89,36 @@ class Deque:
         old = self._data
         self._data = [None] * cap
         walk = self._front
-        for k in range(self._size):                         # self._size here is old size
+        for k in range(self._size):                             # self._size here is old size
             self._data[k] = old[walk]
             walk = (1 + walk) % len(old)
-        self._front = 0                                     # self._front realigned
+        self._front = 0                                         # self._front realigned
 
 
 if __name__ == '__main__':
+    def explore(deque):
+        print("The deque under test --> ID: %d" % id(deque))
+        print("element number --> %d" % len(deque))
+        print("first element --> %d" % deque.first())
+        print("last element --> %d" % deque.last())
+        print("underlying data --> %s" % str(deque._data))
+        print("current front index --> %d" % d._front)
+        print("current back index --> %d" % d._back)
+        print()
+
+    d = Deque()
+    d.add_first(1)
+    d.add_last(2)
+    explore(d)
+    d.add_first(11)
+    d.add_last(22)
+    explore(d)
+    d.add_first(111)
+    d.add_last(222)
+    explore(d)
+    d.add_first(1111)
+    d.add_last(2222)
+    explore(d)
     
 
 
