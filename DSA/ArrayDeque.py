@@ -45,8 +45,8 @@ class Deque:
     def add_first(self, e):
         '''Add element e to the front of deque.'''
         if self._size == len(self._data):
-            self._resize(2 * len(self._data))                   # extend capacity
-        self._front = (self._front - 1) % len(self._data)       # cyclic shift
+            self._resize(2 * len(self._data))                    # extend capacity
+        self._front = (self._front - 1) % len(self._data)        # cyclic shift
         self._data[self._front] = e        
         self._size += 1
  
@@ -54,7 +54,7 @@ class Deque:
         '''Add element e to the back of deque.'''
         if self._size == len(self._data):
             self._resize(2* len(self._data))
-        self._back = (self._back + self._size) % len(self._data)
+        self._back = (self._front + self._size) % len(self._data)# self._front...
         self._data[self._back] = e
         self._size += 1
 
@@ -65,10 +65,10 @@ class Deque:
             raise Empty('Queue is empty')
         answer = self._data[self._front]
         self._data[self._front] = None
-        self._front = (self._front + 1) % len(self._data)       # i.e.,DEFAULT_CAPACITY
+        self._front = (self._front + 1) % len(self._data)        # i.e.,DEFAULT_CAPACITY
         self._size -= 1
         if 0 < self._size < len(self._data)//4:
-            self._resize(len(self._data)//2)                    # shrink list by 1/2 after
+            self._resize(len(self._data)//2)                     # shrink list by 1/2 after
         return answer
 
     def delete_last(self):
@@ -78,10 +78,10 @@ class Deque:
             raise Empty('Queue is empty')
         answer = self._data[self._front]
         self._data[self._front] = None
-        self._front = (self._front + 1) % len(self._data)       # i.e.,DEFAULT_CAPACITY
+        self._front = (self._front + 1) % len(self._data)        # i.e.,DEFAULT_CAPACITY
         self._size -= 1
         if 0 < self._size < len(self._data)//4:
-            self._resize(len(self._data)//2)                    # shrink list by 1/2 after
+            self._resize(len(self._data)//2)                     # shrink list by 1/2 after
         return answer
 
     def _resize(self, cap):
@@ -89,11 +89,12 @@ class Deque:
         old = self._data
         self._data = [None] * cap
         walk = self._front
-        for k in range(self._size):                             # self._size here is old size
+        for k in range(self._size):                             # self._size is old size
             self._data[k] = old[walk]
             walk = (1 + walk) % len(old)
         self._front = 0                                         # self._front realigned
-
+        self._back = len(old) - 1                               # self._back realigned
+    
 
 if __name__ == '__main__':
     def explore(deque):
@@ -107,17 +108,21 @@ if __name__ == '__main__':
         print()
 
     d = Deque()
-    d.add_first(1)
-    d.add_last(2)
+    d.add_last(1)
+    d.add_first(4)
+    d.add_first(44)
+    d.add_first(444)
+
+    d.add_first(4444)
+    d.add_last(11)
+    d.add_last(111)
+
+    d.add_last(1111)
+    d.add_first(44444)
     explore(d)
-    d.add_first(11)
-    d.add_last(22)
+    d.add_last(11111)
     explore(d)
-    d.add_first(111)
-    d.add_last(222)
-    explore(d)
-    d.add_first(1111)
-    d.add_last(2222)
+    d.add_first(444444)
     explore(d)
     
 
