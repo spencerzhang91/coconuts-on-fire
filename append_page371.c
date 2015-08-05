@@ -40,7 +40,9 @@ int main(void)
                 fputs("Can't create input buffer\n", stderr);
                 continue;
             }
+            
             append(fs, fa);
+            
             if (ferror(fs) != 0)
                 fprintf(stderr, "Error in reading file %s.\n", file_src);
             if (ferror(fa) != 0)
@@ -63,19 +65,3 @@ void append(FILE *source, FILE *dest)
     while ((bytes = fread(temp, sizeof(char), BUFSIZE, source)) > 0)
         fwrite(temp, sizeof(char), bytes, dest);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
