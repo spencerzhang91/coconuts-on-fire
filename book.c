@@ -2,7 +2,7 @@
 #include <stdio.h>
 #define MAXTITL 41
 #define MAXAUTL 31
-struct book{
+struct book {
     char titile[MAXTITL];
     char author[MAXAUTL];
     float value;

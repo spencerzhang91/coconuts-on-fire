@@ -3,7 +3,7 @@
 #define MAXTITL 40
 #define MAXAUTL 40
 #define MAXBKS 100 // max book number
-struct book{
+struct book {
     char title[MAXTITL];
     char author[MAXAUTL];
     float value;

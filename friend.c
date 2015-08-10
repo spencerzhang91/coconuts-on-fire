@@ -9,11 +9,11 @@ const char *msgs[5] =
     "over a delicious ",
     " and have a few laughs"
 };
-struct names{
+struct names {
     char first[LEN];
     char last[LEN];
 };
-struct guy{
+struct guy {
     struct names handle;
     char favfood[LEN];
     char job[LEN];
