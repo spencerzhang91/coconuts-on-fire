@@ -3,35 +3,36 @@
 #include <stdlib.h>
 #define NUM 40
 
-void fillarray(double ar[], int n);
-void showarray(const double ar[], int n);
+struct names {
+    char first[40];
+    char last[40];
+};
+
+void showarray(const struct names ar[], int n);
 int mycomp(const void *p1, const void *p2);
 
 int main(void)
 {
-    double vals[NUM];
-    fillarray(vals, NUM);
+    struct names staff[3] = {
+        {"James", "Bond"},
+        {"Jason", "Borne"},
+        {"Charley", "Brown"},
+    };
+    
     puts("Random list: ");
     showarray(vals, NUM);
-    qsort(vals, NUM, sizeof(double), mycomp);
+    qsort(vals, NUM, sizeof(struct names), mycomp);
     puts("\nSorted list: ");
     showarray(vals, NUM);
     return 0;
 }
 
-void fillarray(double ar[], int n)
-{
-    int index;
-    for (index = 0; index < n; index++)
-        ar[index] = (double)rand()/((double)rand() + 0.1);
-}
-
-void showarray(const double ar[], int n)
+void showarray(const struct names ar[], int n)
 {
     int index;
     for (index = 0; index < n; index++)
     {
-        printf("%9.4f ", ar[index]);
+        printf("%s %s ", ar[index].first, ar[index].last);
         if (index % 6 == 5)
             putchar('\n');
     }
@@ -42,13 +43,14 @@ void showarray(const double ar[], int n)
 int mycomp(const void *p1, const void *p2)
 {
     /* need to use double pointer */
-    const double *a1 = (const double *)p1;
-    const double *a2 = (const double *)p2;
+    const struct names *a1 = (const double *)p1;
+    const struct names *a2 = (const double *)p2;
+    int res;
+    res = strcmp(a1->last, a2->last);
     
-    if (*a1 < *a2)
-        return -1;
-    else if (*a1 > *a2)
-        return 1;
+    if (res != 0)
+        return res;
+    
     else
-        return 0;
+        return strcmp(a1->last, a2->last);
 }
