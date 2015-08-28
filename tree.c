@@ -30,9 +30,9 @@ void InitializeTree(Tree *ptree)
 bool TreeIsEmpty(const Tree *ptree)
 {
     if (ptree->root == NULL)
-        return true
+        return true;
     else
-        return false
+        return false;
 }
 
 bool TreeIsFull(const Tree *ptree)
@@ -53,7 +53,7 @@ bool AddItem(const Item *pi, Tree *ptree)
         fprintf(stderr, "The tree is full\n");
         return false;                               // return early
     }
-    if (SeekItem(pi, ptree) != NULL)
+    if (SeekItem(pi, ptree).child != NULL)
     {
         fprintf(stderr, "Attempted to add duplicate item\n");
         return false;                               // return early
@@ -131,14 +131,14 @@ static void DeleteAllNodes(Node *root)
 
 static void AddNode(Node *new_node, Node *root)     // add a new node into a tree using Node pointers
 {
-    if (ToLeft(&new_node->item, &root->item)
+    if (ToLeft(&new_node->item, &root->item))
     {
         if (root->left == NULL)                     // if the left sub tree is empty then add new_node here
             root->left = new_node;
         else
             AddNode(new_node, root->left);          // recurse
     }
-    else if (ToRight(&new_node, &root->item))
+    else if (ToRight(&new_node->item, &root->item))
     {
         if (root->right == NULL)                    // if the left sub tree is empty then add new_node here
             root->right = new_node;
@@ -174,7 +174,7 @@ static bool ToRight(const Item *i1, const Item *i2)
         return false;
 }
 
-static Node *MakdNode(const Item *pi)
+static Node *MakeNode(const Item *pi)
 {
     Node *new_node;
     new_node = (Node *)malloc(sizeof(Node));
@@ -191,7 +191,7 @@ static Pair SeekItem(const Item *pi, const Tree *ptree)
 {
     Pair look;
     look.parent = NULL;
-    look.child = ptree;                             // initialize look.chile to tree root node
+    look.child = ptree->root;                             // initialize look.chile to tree root node
     if (look.child == NULL)                         // if the tree is an empty tree( root is NULL)?
         return look;                                // return NULL pair if so
     while (look.child != NULL)
@@ -239,17 +239,4 @@ static void DeleteNode(Node **ptr)
         free(temp);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
