@@ -31,8 +31,10 @@ int binary_search(int num, int *arr, int len)
 	{
 		if (num == arr[(min+max)/2])
 			return (min + max) / 2;
+			
 		else if (num < arr[(min+max)/2])
 			max = (min + max)/2 - 1;
+			
 		else if (num > arr[(min+max)/2])
 			min = (min + max)/2 + 1;
 	}
@@ -47,12 +49,4 @@ void insert_item(int num, int *arr, int len, int place)
 	}
 	arr[place] = num;
 }
-
-
-
-
-
-
-
-
 
