@@ -20,7 +20,7 @@ def cuttail_c(name):
 def clean(origin, destin):
     temps1 = []
     cnt = 0
-    reader = csv.reader(origin) 
+
     for name in origin:
         temps1.append(cuttail_c(name))
     origin.close()
