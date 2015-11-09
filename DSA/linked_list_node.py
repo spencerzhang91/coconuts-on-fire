@@ -10,6 +10,20 @@ class ListNode:
     def __repr__(self):
         return str(self.val)
 
+
+def CreateLinkedList(infolist):
+    '''
+    The infolist is a python list contains structure information, this
+    function returns the head node of the constructed linked list.
+    '''
+    curr = head = ListNode(None)
+    for item in infolist:
+        node = ListNode(item)
+        curr.next = node
+        curr = curr.next
+    head = head.next
+    return head
+
 def traverse(head):
     curNode = head
     while curNode != None:
