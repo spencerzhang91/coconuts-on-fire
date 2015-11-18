@@ -11,4 +11,6 @@ class Life:
 if __name__ == "__main__":
     brain = Life('Brain')
     brain.live()
+    brain = 'lorrita'
     sue = Life('Sue')
+    
