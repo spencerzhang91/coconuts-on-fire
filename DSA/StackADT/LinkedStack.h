@@ -2,10 +2,6 @@
 /* A more modern and reusable implementation */
 #ifndef _LINKEDSTACK_H
 #define _LINKEDSTACK_H
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
 #define ElementType int
 #define MAX_STACK_SIZE 100
 
@@ -31,4 +27,3 @@ ElementType top(Stack S);
 void display(Stack S);
 
 #endif
-
