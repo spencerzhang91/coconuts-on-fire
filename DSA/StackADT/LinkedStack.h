@@ -10,13 +10,12 @@ struct Node {
     struct Node *next;
 };
 
-typedef struct {
+typedef struct Snode *Stack;
+struct Snode{
     struct Node *head;
     int maxsize;
     int cursize;
-} Snode;
-
-typedef Snode *Stack;
+};
 
 Stack CreateStack(int size);
 bool IsFull(Stack S);
