@@ -1,6 +1,7 @@
 /* C implementation of Linked List based Stack ADT */
 /* A more modern and reusable implementation */
 #ifndef _LINKEDSTACK_H
+#include <stdbool.h>
 #define _LINKEDSTACK_H
 #define ElementType int
 #define MAX_STACK_SIZE 100
