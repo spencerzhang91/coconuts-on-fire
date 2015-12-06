@@ -7,7 +7,7 @@
 
 Stack CreateStack(int size)
 {
-    Stack newS = (Stack)calloc(size, sizeof(struct Snode));
+    Stack newS = (Stack)calloc(size, sizeof(Snode));
     newS->head = (struct Node *)calloc(size, sizeof(struct Node));
     newS->head->next = NULL;
     newS->cursize = 0;

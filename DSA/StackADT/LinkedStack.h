@@ -2,8 +2,9 @@
 /* A more modern and reusable implementation */
 #ifndef _LINKEDSTACK_H
 #include <stdbool.h>
+#include "LinkedGraph.h"
 #define _LINKEDSTACK_H
-#define ElementType int
+#define ElementType nodeptr
 #define MAX_STACK_SIZE 100
 
 struct Node {
@@ -11,12 +12,13 @@ struct Node {
     struct Node *next;
 };
 
-typedef struct Snode *Stack;
-struct Snode{
+typedef struct {
     struct Node *head;
     int maxsize;
     int cursize;
-};
+} Snode;
+
+typedef Snode *Stack;
 
 Stack CreateStack(int size);
 bool IsFull(Stack S);
