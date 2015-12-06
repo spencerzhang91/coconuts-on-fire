@@ -51,7 +51,7 @@ ElementType pop(Stack S)
     }
     else
     {
-        int res = S->head->data;
+        ElementType res = S->head->data;
         S->head = S->head->next;
         S->cursize--;
         return res;
