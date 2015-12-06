@@ -22,20 +22,20 @@ int main(void)
 
 void dfs_iterative(LGraph graph, Vertex start, void (*func)(nodeptr p))
 {
-    int visited[graph->vertex_num]; // rest elements init automaticly
+    int visited[graph->vertex_num];
     Stack stack = CreateStack(MAX_STACK_SIZE);
-    nodeptr curr, startnode;
-    curr = startnode = graph->G[start];
+    nodeptr curr;
+    curr = graph->G[start];
     
     (*func)(curr);
     push(stack, curr);
     visited[curr->adjv] = 1;
     
-    while (curr->adjv != start || stack)
+    while (curr->adjv != start || !IsEmpty(stack))
     {
         nodeptr temp = nextunvisited(curr, visited);
-        if (temp)
-            curr = graph->G[temp->adjv];
+        if (temp) // if curr has next unvisited connection
+            curr = graph->G[temp->adjv]; // cursor jump to that node in G
         else curr = NULL;
         if (curr)
         {
