@@ -2,12 +2,12 @@
 /* header files */
 #ifndef _LINKEDQUEUE_H
 #define _LINKEDQUEUE_H
+#include "LinkedGraph.h"
+#define ElementType nodeptr // can be changed according to particular purpose
+#define MAXSIZE 100
 
-#define ElementType int
-#define MAXSIZE 10
-
-typedef struct node *Node;
-struct node {
+typedef struct qnode *Node;
+struct qnode {
     ElementType data;
     Node next;
 };

@@ -9,6 +9,7 @@ Queue CreateQueue(int maxsize)
     Queue temp = (Queue)malloc(sizeof(struct Qnode));
     temp->front = temp->rear = NULL;
     temp->maxsize = maxsize;
+    temp->cursize = 0;
     return temp;
 }
 
@@ -33,7 +34,7 @@ void enqueue(Queue Q, ElementType item)
     }   
     else
     {
-        rearcell = (Node)malloc(sizeof(struct node));
+        rearcell = (Node)malloc(sizeof(struct qnode));
         rearcell->data = rearelem;
         if (Q->cursize == 0)
             Q->front = Q->rear = rearcell;
@@ -53,8 +54,7 @@ ElementType dequeue(Queue Q)
     if (QIsEmpty(Q))
     {
         printf("The queue is empty.\n");
-        ElementType error = -1;
-        return error; 
+        return NULL; 
     }
     else
     {
