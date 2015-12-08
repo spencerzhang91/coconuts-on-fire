@@ -1,10 +1,10 @@
 /* C implementation of Linked List based Stack ADT */
-/* A more modern and reusable implementation */
+/* A more modern and reusable implementation, for MatrixGraph use only */
 #ifndef _LINKEDSTACK_H
 #include <stdbool.h>
 #include "MatrixGraph.h"
 #define _LINKEDSTACK_H
-#define ElementType nodeptr  // can be changed according to particular purpose
+#define ElementType int  // can be changed according to particular purpose
 #define MAX_STACK_SIZE 100
 
 struct Node {

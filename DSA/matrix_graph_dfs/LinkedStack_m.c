@@ -1,9 +1,9 @@
 /* C implementation of Linked List based Stack ADT */
-/* A more modern and reusable implementation */
+/* A more modern and reusable implementation, for MatrixGraph use only */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "MatrixStack.h"
+#include "LinkedStack_m.h"
 
 Stack CreateStack(int size)
 {

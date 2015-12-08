@@ -2,7 +2,7 @@
 /* Graph ADT based on adjacency matrix storage */
 #include <stdio.h>
 #include <stdlib.h>
-#include "LinkedStack.h"
+#include "LinkedStack_m.h"
 #include "MatrixGraph.h"
 
 /* Modified definition of dfs: support function pointer as an argument */
@@ -17,7 +17,7 @@ int main(void)
     buildGraph_test(tg);
     showmatrix(tg);
     dfs_iterative(tg, 0, visit);
-    getchar();
+
     return 0;
 }
 // p is the vertex number of the 
@@ -34,18 +34,23 @@ void dfs_iterative(MGraph graph, Vertex start, void (*func)(int p))
     
     while (curr != start || !IsEmpty(stack))
     {
+        int flag = 0;
         for (int i = 0; i < graph->vertex_num; i++)
-        {
             if ((graph->G[curr][i] == 1) && (visited[i] != 1))
             {
                 curr = i;
-                (*func)(curr);
-                visited[curr] = 1;
-                push(stack, curr);
+                flag++;
                 break;
             }
-        }
-        curr = pop(stack);
+        if (flag)
+        {
+            (*func)(curr);
+            visited[curr] = 1;
+            push(stack, curr);
+            display(stack); // check point
+        }    
+        else
+            curr = pop(stack);
     }
 }
 
