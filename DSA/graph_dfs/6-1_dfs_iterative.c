@@ -11,7 +11,7 @@ void visit(nodeptr p);
 
 int main(void)
 {
-    int vertices = 10;
+    int vertices = 7;
     LGraph tg = CreateGraph(vertices);
     buildGraph_test(tg);
     showmatrix(tg);

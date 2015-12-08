@@ -6,13 +6,13 @@
 #include "MatrixGraph.h"
 
 /* Modified definition of dfs: support function pointer as an argument */
-void dfs_iterative(MGraph graph, Vertex start, void (*func)(nodeptr p));
-nodeptr nextunvisited(nodeptr curr, int visited[]);
-void visit(nodeptr p);
+void dfs_iterative(MGraph graph, Vertex start, void (*func)(int p));
+int nextunvisited(int curr, int visited[]);
+void visit(int p);
 
 int main(void)
 {
-    int vertices = 10;
+    int vertices = 7;
     MGraph tg = CreateGraph(vertices);
     buildGraph_test(tg);
     showmatrix(tg);
@@ -20,48 +20,36 @@ int main(void)
     getchar();
     return 0;
 }
-
-void dfs_iterative(MGraph graph, Vertex start, void (*func)(nodeptr p))
+// p is the vertex number of the 
+void dfs_iterative(MGraph graph, Vertex start, void (*func)(int p))
 {
     int visited[graph->vertex_num];
     Stack stack = CreateStack(MAX_STACK_SIZE);
-    nodeptr curr;
-    curr = graph->G[start];
+    int curr;
+    curr = start; // here curr marks current vertex
     
     (*func)(curr);
     push(stack, curr);
-    visited[curr->adjv] = 1;
+    visited[curr] = 1;
     
-    while (curr->adjv != start || !IsEmpty(stack))
+    while (curr != start || !IsEmpty(stack))
     {
-        nodeptr temp = nextunvisited(curr, visited);
-        if (temp) // if curr has next unvisited connection
-            curr = graph->G[temp->adjv]; // cursor jump to that node in G
-        else curr = NULL;
-        if (curr)
+        for (int i = 0; i < graph->vertex_num; i++)
         {
-            (*func)(curr);
-            visited[curr->adjv] = 1;
-            push(stack, curr);
+            if ((graph->G[curr][i] == 1) && (visited[i] != 1))
+            {
+                curr = i;
+                (*func)(curr);
+                visited[curr] = 1;
+                push(stack, curr);
+                break;
+            }
         }
-        else curr = pop(stack);
+        curr = pop(stack);
     }
 }
 
-nodeptr nextunvisited(nodeptr curr, int visited[])
+void visit(int p)
 {
-    // printf("curr is: \n", curr->adjv);
-    curr = curr->next;
-    while (curr)
-    {
-        if (visited[curr->adjv] == 1)
-            curr = curr->next;
-        else return curr;
-    }
-    return NULL;
-}
-
-void visit(nodeptr p)
-{
-    printf("visiting vertext %d\n", p->adjv);
+    printf("visiting vertext %d\n", p);
 }
