@@ -286,9 +286,3 @@ if __name__ == '__main__':
     
     t = t2-t1
     print(t)
-    
-
-
-
-
-
