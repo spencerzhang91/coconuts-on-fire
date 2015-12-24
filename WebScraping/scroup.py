@@ -16,4 +16,8 @@ for chunk in res.iter_content(100000):
 '''
 
 soup = bs4.BeautifulSoup(res.text, 'lxml')
+titles = soup.select('tr[class] > td[class="title"] > a[class=""]')
+authors = soup.select('tr[class] > td[nowrap="nowrap"] > a[class=""]')
+follows = soup.select('tr[class] > td[class="" nowrap="nowrap"]')
+
 
