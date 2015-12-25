@@ -32,7 +32,15 @@ def saveLocal(col1, col2, col3, col4):
     type cols: list
     This function saves the scraped data into CSV file
     '''
-    pass # to be done
+    local_file = open('topic_saver.csv', 'w')
+    file_writer = csv.writer(local_file)
+    for i in len(col1):
+        file_writer.writerow([col1[i],
+                              col2[i],
+                              col3[i],
+                              col4[i]])
+        
+    
 
 def StartOperation(init_url: str, pages: int) -> None:
     '''
@@ -41,7 +49,10 @@ def StartOperation(init_url: str, pages: int) -> None:
     '''
     num = 0
     perpage = 25
+    test_file = open('test.csv', 'w', newline='')
+    test_writer = csv.writer(test_file)
     for i in range(pages):
+        print('Scraping page %d...' % i)
         url = init_url + str(num + perpage * i)
         res = requests.get(url)
         try:
@@ -49,18 +60,32 @@ def StartOperation(init_url: str, pages: int) -> None:
         except Exception as e:
             print('There is a problem:', e)
     
-    
         soup = bs4.BeautifulSoup(res.text, 'lxml')
         titles = soup.select('tr[class] > td[class="title"] > a[class=""]')
         authors = soup.select('tr[class] > td[nowrap="nowrap"] > a[class=""]')
         follows = soup.select('tr[class] > td[class=""]')
         lastres = soup.select('tr[class] > td[class="time"]')
+        print('titles: %d authors: %d follows: %d lastres: %d' %
+              (len(titles), len(authors), len(follows), len(lastres)))
+        # showfunc(titles, authors, follows, lastres)
+        
+        for j in range(len(titles)):
+            try:
+                test_writer.writerow([titles[j].getText(),
+                                      authors[j].getText(),
+                                      follows[j].getText(),
+                                      lastres[j].getText()])
+            except Exception as e:
+                print('Something wrong:', e)
+                continue
+        print('Saving page %d to local...' % i)
+    test_file.close()
 
-        showfunc(titles, authors, follows, lastres)
+            
 
 
 url = 'https://www.douban.com/group/tianhezufang/discussion?start='
-StartOperation(url, 631)
+StartOperation(url, 10)
 
 
 
