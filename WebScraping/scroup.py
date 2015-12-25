@@ -87,7 +87,7 @@ def StartOperation(init_url: str, pages: int) -> None:
 if __name__ == '__main__':
     
     url = 'https://www.douban.com/group/tianhezufang/discussion?start='
-    StartOperation(url, 10)
+    StartOperation(url, 631)
 
 
 
