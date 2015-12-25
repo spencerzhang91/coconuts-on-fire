@@ -19,6 +19,9 @@ for chunk in res.iter_content(100000):
 '''
 
 def showfunc(l1, l2, l3, l4):
+    '''
+    To print out the scraped topics
+    '''
     length = len(l1)
     for i in range(length):
         print('%s %s %s %s' %
@@ -26,6 +29,7 @@ def showfunc(l1, l2, l3, l4):
                l2[i].getText(),
                l3[i].getText(),
                l4[i].getText()))
+
 
 def saveLocal(col1, col2, col3, col4):
     '''
@@ -39,8 +43,7 @@ def saveLocal(col1, col2, col3, col4):
                               col2[i],
                               col3[i],
                               col4[i]])
-        
-    
+
 
 def StartOperation(init_url: str, pages: int) -> None:
     '''
@@ -52,7 +55,7 @@ def StartOperation(init_url: str, pages: int) -> None:
     test_file = open('test.csv', 'w', newline='')
     test_writer = csv.writer(test_file)
     for i in range(pages):
-        print('Scraping page %d...' % i)
+        print('Scraping page %d...' % (i+1))
         url = init_url + str(num + perpage * i)
         res = requests.get(url)
         try:
@@ -68,7 +71,7 @@ def StartOperation(init_url: str, pages: int) -> None:
         print('titles: %d authors: %d follows: %d lastres: %d' %
               (len(titles), len(authors), len(follows), len(lastres)))
         # showfunc(titles, authors, follows, lastres)
-        
+        print('Saving page %d to local...' % (i+1))
         for j in range(len(titles)):
             try:
                 test_writer.writerow([titles[j].getText(),
@@ -76,16 +79,15 @@ def StartOperation(init_url: str, pages: int) -> None:
                                       follows[j].getText(),
                                       lastres[j].getText()])
             except Exception as e:
-                print('Something wrong:', e)
+                print('wrong page %d' % (i+1)) # try to find out why failure(1) happens
+                print('error message:', e)
                 continue
-        print('Saving page %d to local...' % i)
     test_file.close()
 
-            
-
-
-url = 'https://www.douban.com/group/tianhezufang/discussion?start='
-StartOperation(url, 10)
+if __name__ == '__main__':
+    
+    url = 'https://www.douban.com/group/tianhezufang/discussion?start='
+    StartOperation(url, 10)
 
 
 
