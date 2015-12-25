@@ -1,8 +1,10 @@
 #! python3
 # This script is created for scraping douban group topics
+# Should be able to scrape [topic,author,follow,lastresponse]
+# info of all group topics
 import requests, bs4
 num = 0
-url = 'http://www.douban.com/group/gz/discussion?start=' + str(num)
+url = 'https://www.douban.com/group/tianhezufang/discussion?start=' + str(num)
 res = requests.get(url)
 try:
     res.raise_for_status()
@@ -18,7 +20,10 @@ def showfunc(l1, l2, l3, l4):
     length = len(l1)
     for i in range(length):
         print('%s %s %s %s' %
-              (l1[i].getText(), l2[i].getText(), l3[i].getText(), l4[i].getText()))
+              (l1[i].getText(),
+               l2[i].getText(),
+               l3[i].getText(),
+               l4[i].getText()))
 
 def StartOperation(init_url: str) -> None:
     '''
