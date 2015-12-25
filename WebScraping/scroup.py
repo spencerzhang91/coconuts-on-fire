@@ -61,7 +61,7 @@ def StartOperation(init_url: str, pages: int) -> None:
             print('There is a problem:', e)
     
         soup = bs4.BeautifulSoup(res.text, 'lxml')
-        titles = soup.select('tr[class] > td[class="title"] > a[class=""]')
+        titles = soup.select('tr[class] > td[class="title"] > a[class=""]') # need to be modified: retrive the attribute value of tag <td>
         authors = soup.select('tr[class] > td[nowrap="nowrap"] > a[class=""]')
         follows = soup.select('tr[class] > td[class=""]')
         lastres = soup.select('tr[class] > td[class="time"]')
