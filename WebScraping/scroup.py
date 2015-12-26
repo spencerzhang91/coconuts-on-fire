@@ -26,7 +26,7 @@ def StartOperation(init_url: str, pages: int) -> None:
     error_counter = 0
     perpage = 25
     failure_urls = []
-    test_file = open(r'C:\Users\spencer\Desktop\test.csv', 'w', newline='')
+    test_file = open(r'C:\Users\spencer\Desktop\guangzhouzufang.csv', 'w', newline='')
     test_writer = csv.writer(test_file)
     for i in range(pages):
         print('Scraping page %d...' % (i+1))
@@ -53,22 +53,23 @@ def StartOperation(init_url: str, pages: int) -> None:
                                       authors[j].getText().encode('utf-8'),
                                       follows[j].getText().encode('utf-8'),
                                       lastres[j].getText().encode('utf-8')])
-                print(titles[j]['title'])
+                # print(titles[j]['title'])
             except Exception as e:
                 print('Error occured on page %d line %d' % (i+1, j+1))
-                print(*[titles[j].getText(), authors[j].getText(),
+                print(*[titles[j].getText(), authors[j].getText()])
                 print('error message:', e)
                 if url not in failure_urls:
-                    failure_urls.append(url)
-                error_counter += 1
-                        
+                        failure_urls.append(url)
+                error_counter += 1     
     test_file.close()
     print('\nTotal failed topic number: %d topics!' % error_counter)
     return failure_urls
 
 if __name__ == '__main__':
-    url = 'https://www.douban.com/group/tianhezufang/discussion?start='
-    failures = StartOperation(url, 10)
+    url_list = ['https://www.douban.com/group/tianhezufang/discussion?start=',
+                'http://www.douban.com/group/gz020/discussion?start=']
+    url = url_list[1]
+    failures = StartOperation(url, 1322)
     print('[The urls below occured problem]:')
     for url in failures:
         print(url)
