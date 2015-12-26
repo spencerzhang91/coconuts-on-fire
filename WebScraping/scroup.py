@@ -3,20 +3,6 @@
 # Should be able to scrape [topic,author,follow,lastresponse]
 # info of all group topics
 import requests, bs4, csv
-'''
-num = 0
-url = 'https://www.douban.com/group/tianhezufang/discussion?start=' + str(num)
-res = requests.get(url)
-try:
-    res.raise_for_status()
-except Exception as e:
-    print('There is a problem:', e)
-
-print(type(res))
-page = open('topics.html', 'wb')
-for chunk in res.iter_content(100000):
-    page.write(chunk)
-'''
 
 def showfunc(l1, l2, l3, l4):
     '''
@@ -95,14 +81,9 @@ def StartOperation(init_url: str, pages: int) -> None:
     return failure_urls
 
 if __name__ == '__main__':
-    
     url = 'https://www.douban.com/group/tianhezufang/discussion?start='
-    failures = StartOperation(url, 10)
+    failures = StartOperation(url, 631)
     print('[The urls below occured problem]:')
     for url in failures:
         print(url)
-
-
-
-
 
