@@ -65,7 +65,8 @@ def StartOperation(init_url: str, pages: int) -> None:
             print('There is a problem:', e)
     
         soup = bs4.BeautifulSoup(res.text, 'lxml')
-        titles = soup.select('tr[class] > td[class="title"] > a[class=""]') # need to be modified: retrive the attribute value of tag <td>
+        titles = soup.select('tr[class] > td[class="title"] > a[class=""]')
+        # need to be modified: retrive the attribute value of tag <td>
         authors = soup.select('tr[class] > td[nowrap="nowrap"] > a[class=""]')
         follows = soup.select('tr[class] > td[class=""]')
         lastres = soup.select('tr[class] > td[class="time"]')
@@ -80,9 +81,13 @@ def StartOperation(init_url: str, pages: int) -> None:
                                       follows[j].getText(),
                                       lastres[j].getText()])
             except Exception as e:
-                print('wrong page %d' % (i+1)) # try to find out why failure(1) happens
+                print('wrong page %d line %d' % (i+1, j+1))
+                print(*[titles[j].getText(), authors[j].getText(),
+                       follows[j].getText(), lastres[j].getText()])
+                # try to find out why failure(1) happens
                 print('error message:', e)
-                failure_urls.append(url) # in order to find out what happened
+                if url not in failure_urls:
+                    failure_urls.append(url)
                 continue
     test_file.close()
     return failure_urls
@@ -91,6 +96,7 @@ if __name__ == '__main__':
     
     url = 'https://www.douban.com/group/tianhezufang/discussion?start='
     failures = StartOperation(url, 10)
+    print('The urls below occured problem:')
     for url in failures:
         print(url)
 
