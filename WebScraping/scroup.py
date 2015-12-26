@@ -26,7 +26,9 @@ def StartOperation(init_url: str, pages: int) -> None:
     error_counter = 0
     perpage = 25
     failure_urls = []
-    file = open(r'C:\Users\spencer\Desktop\guangzhouzufang.csv', 'w', newline='')
+    file = open(r'C:\Users\spencer\Desktop\guangzhouzufang.csv',
+                'w', newline='',
+                encoding='utf8') # this solves the unicode problem
     writer = csv.writer(file)
     for i in range(pages):
         print('Scraping page %d...' % (i+1))
@@ -50,10 +52,10 @@ def StartOperation(init_url: str, pages: int) -> None:
         for j in range(len(titles)):
             try:
                 # the four lines below occur encoding error, help!
-                writer.writerow([titles[j]['title'].encode(),
-                                 authors[j].getText().encode(),
-                                 follows[j].getText().encode(),
-                                 lastres[j].getText().encode()])
+                writer.writerow([titles[j]['title'],
+                                 authors[j].getText(),
+                                 follows[j].getText(),
+                                 lastres[j].getText()])
                 # print(titles[j]['title'])
             except Exception as e:
                 print('Error occured on page %d line %d' % (i+1, j+1))
