@@ -72,7 +72,7 @@ if __name__ == '__main__':
     url_list = ['https://www.douban.com/group/tianhezufang/discussion?start=',
                 'http://www.douban.com/group/gz020/discussion?start=']
     url = url_list[1]
-    failures = StartOperation(url, 5)
+    failures = StartOperation(url, 1323)
     if failures:
         print('[The urls below occured problem]:')
         for url in failures:
