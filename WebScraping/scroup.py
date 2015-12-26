@@ -52,7 +52,8 @@ def StartOperation(init_url: str, pages: int) -> None:
     '''
     num = 0
     perpage = 25
-    test_file = open('test.csv', 'w', newline='')
+    failure_urls = []
+    test_file = open(r'C:\Users\spencer\Desktop\test.csv', 'w', newline='')
     test_writer = csv.writer(test_file)
     for i in range(pages):
         print('Scraping page %d...' % (i+1))
@@ -81,13 +82,17 @@ def StartOperation(init_url: str, pages: int) -> None:
             except Exception as e:
                 print('wrong page %d' % (i+1)) # try to find out why failure(1) happens
                 print('error message:', e)
+                failure_urls.append(url) # in order to find out what happened
                 continue
     test_file.close()
+    return failure_urls
 
 if __name__ == '__main__':
     
     url = 'https://www.douban.com/group/tianhezufang/discussion?start='
-    StartOperation(url, 631)
+    failures = StartOperation(url, 10)
+    for url in failures:
+        print(url)
 
 
 
