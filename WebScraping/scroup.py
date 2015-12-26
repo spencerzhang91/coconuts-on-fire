@@ -17,7 +17,7 @@ def showfunc(l1, l2, l3, l4):
                l4[i].getText()))
 
 
-def StartOperation(init_url: str, pages: int) -> None:
+def StartOperation(init_url: str, pages: int, filename: str) -> None:
     '''
     type init_url: str
     rtype: None
@@ -26,7 +26,7 @@ def StartOperation(init_url: str, pages: int) -> None:
     error_counter = 0
     perpage = 25
     failure_urls = []
-    file = open(r'C:\Users\spencer\Desktop\guangzhouzufang.csv',
+    file = open(r'C:\Users\spencer\Desktop\%s.csv' % filename,
                 'w', newline='',
                 encoding='utf8') # this solves the unicode problem
     writer = csv.writer(file)
@@ -47,7 +47,7 @@ def StartOperation(init_url: str, pages: int) -> None:
         
         print('[page info]titles: %d authors: %d follows: %d lastres: %d' %
               (len(titles), len(authors), len(follows), len(lastres)))      
-        print('Saving page %d to cwd local file %s...' % (i+1, 'guangzhouzufang.csv'))
+        print('Saving page %d to cwd local file %s.csv...' % (i+1, filename))
         
         for j in range(len(titles)):
             try:
@@ -70,9 +70,10 @@ def StartOperation(init_url: str, pages: int) -> None:
 
 if __name__ == '__main__':
     url_list = ['https://www.douban.com/group/tianhezufang/discussion?start=',
-                'http://www.douban.com/group/gz020/discussion?start=']
-    url = url_list[1]
-    failures = StartOperation(url, 1323)
+                'http://www.douban.com/group/gz020/discussion?start=',
+                'http://www.douban.com/group/kaopulove/discussion?start=']
+    url = url_list[2]
+    failures = StartOperation(url, 25270, 'gouda')
     if failures:
         print('[The urls below occured problem]:')
         for url in failures:
