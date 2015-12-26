@@ -63,10 +63,10 @@ def StartOperation(init_url: str, pages: int) -> None:
         print('Saving page %d to cwd local file %s...' % (i+1, 'test.csv'))
         for j in range(len(titles)):
             try:
-                test_writer.writerow([titles[j].getText(),
-                                      authors[j].getText(),
-                                      follows[j].getText(),
-                                      lastres[j].getText()])
+                test_writer.writerow([titles[j].getText().encode('utf-8'),
+                                      authors[j].getText().encode('utf-8'),
+                                      follows[j].getText().encode('utf-8'),
+                                      lastres[j].getText().encode('utf-8')])
             except Exception as e:
                 print('Error occured on page %d line %d' % (i+1, j+1))
                 print(*[titles[j].getText(), authors[j].getText(),
@@ -82,7 +82,7 @@ def StartOperation(init_url: str, pages: int) -> None:
 
 if __name__ == '__main__':
     url = 'https://www.douban.com/group/tianhezufang/discussion?start='
-    failures = StartOperation(url, 631)
+    failures = StartOperation(url, 10)
     print('[The urls below occured problem]:')
     for url in failures:
         print(url)
