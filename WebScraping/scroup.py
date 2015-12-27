@@ -16,8 +16,15 @@ def showfunc(l1, l2, l3, l4):
                l3[i].getText(),
                l4[i].getText()))
 
+def Initialization(file_name: str, url_string: str, page: int)->None:
+    '''
+    This function asks user to input the needed initialization
+    informations of the scraping mission.
+    '''
+    pass # to be done
 
-def StartOperation(init_url: str, pages: int, filename: str) -> None:
+
+def StartOperation(init_url: str, pages: int, filename: str)->None:
     '''
     type init_url: str
     rtype: None
@@ -65,7 +72,8 @@ def StartOperation(init_url: str, pages: int, filename: str) -> None:
                         failure_urls.append(url)
                 error_counter += 1     
     file.close()
-    print('\nTotal failed topic number: %d topics!' % error_counter)
+    if error_counter:
+        print('\nTotal failed topic number: %d topics!' % error_counter)
     return failure_urls
 
 if __name__ == '__main__':
