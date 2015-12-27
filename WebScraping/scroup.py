@@ -22,8 +22,15 @@ def Initialization():
     informations of the scraping mission.
     '''
     url = input('Please copy the url here:')
-    pagenum = int(input('Please enter the page numbers you want'
-                        'to scrape:'))
+    while True:
+        try:
+            pagenum = int(input('Please enter the page numbers you want'
+                            'to scrape:'))
+            break
+        except ValueError as a:
+            print(a)
+            print('Please enter an integer!')
+        
     filename = input('Please enter the file name to save data:')
     return (url, pagenum, filename)
 
@@ -39,7 +46,7 @@ def StartOperation(init_url: str, pages: int, filename: str)->None:
     failure_urls = []
     file = open(r'C:\Users\spencer\Desktop\%s.csv' % filename,
                 'w', newline='',
-                encoding='utf8') # this solves the unicode problem
+                encoding='utf8')
     writer = csv.writer(file)
     for i in range(pages):
         print('Scraping page %d...' % (i+1))
@@ -62,12 +69,12 @@ def StartOperation(init_url: str, pages: int, filename: str)->None:
         
         for j in range(len(titles)):
             try:
-                # the four lines below occur encoding error, help!
+
                 writer.writerow([titles[j]['title'],
                                  authors[j].getText(),
                                  follows[j].getText(),
                                  lastres[j].getText()])
-                # print(titles[j]['title'])
+
             except Exception as e:
                 print('Error occured on page %d line %d' % (i+1, j+1))
                 print(*[titles[j].getText(), authors[j].getText()])
@@ -85,11 +92,10 @@ if __name__ == '__main__':
                 'http://www.douban.com/group/gz020/discussion?start=',
                 'http://www.douban.com/group/kaopulove/discussion?start=']
     url = url_list[2]
-    failures = StartOperation(url, 25270, 'gouda')
+    failures = StartOperation(url, 1, 'gouda')
     if failures:
         print('[The urls below occured problem]:')
         for url in failures:
             print(url)
     else:
         print('All pages successfully scraped!')
-
