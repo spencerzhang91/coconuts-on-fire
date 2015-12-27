@@ -16,12 +16,16 @@ def showfunc(l1, l2, l3, l4):
                l3[i].getText(),
                l4[i].getText()))
 
-def Initialization(file_name: str, url_string: str, page: int)->None:
+def Initialization():
     '''
     This function asks user to input the needed initialization
     informations of the scraping mission.
     '''
-    pass # to be done
+    url = input('Please copy the url here:')
+    pagenum = int(input('Please enter the page numbers you want'
+                        'to scrape:'))
+    filename = input('Please enter the file name to save data:')
+    return (url, pagenum, filename)
 
 
 def StartOperation(init_url: str, pages: int, filename: str)->None:
