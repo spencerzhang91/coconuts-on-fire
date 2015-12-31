@@ -112,6 +112,16 @@ def StartOperation(init_url: str, pages: int, filename: str)->None:
         print('\nTotal failed topic number: %d topics!' % error_counter)
     return failure_urls
 
+def SearchAuthor(person:str, groups:list) -> list:
+    '''
+    This function should be capable of search a certain member of douban
+    in one or multiple group, see what topic he/she has posted.
+    This feature shall be running parellel with the main operation, and
+    return the url(s) of topic which is(are) posted by the interested person.
+    '''
+    pass
+    # to be done within this year
+
 if __name__ == '__main__':
     """
     url_list = ['https://www.douban.com/group/tianhezufang/discussion?start=',
