@@ -130,7 +130,7 @@ def SearchDate(date:str, groups:list) -> list:
     This function should be capable of searching a douban group or multiple
     groups' topics within a certain time period or date.
     # Arguments
-    date: {type: str; formate: "xxxx/xx/xx/xx:xx:xx"(str)}
+    date: {type: str; formate: "yyyy-mm-dd"(str)}
     groups: {type: [str, ...]} (list of url strings)
     Returns a list to contain applied url strings.
     '''
