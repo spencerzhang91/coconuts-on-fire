@@ -116,11 +116,27 @@ def SearchAuthor(person:str, groups:list) -> list:
     '''
     This function should be capable of search a certain member of douban
     in one or multiple group, see what topic he/she has posted.
-    This feature shall be running parellel with the main operation, and
-    return the url(s) of topic which is(are) posted by the interested person.
+    This feature shall be running parellel with the main operation.
+    # Arguments
+    date: {type: str; formate: "xxxx/xx/xx/xx:xx:xx"(str)}
+    groups: {type: [str, ...]} (list of url strings)
+    Returns a list to contain applied url strings.
     '''
     pass
-    # to be done within this year
+    # to be done before Jan 15
+
+def SearchDate(date:str, groups:list) -> list:
+    '''
+    This function should be capable of searching a douban group or multiple
+    groups' topics within a certain time period or date.
+    # Arguments
+    date: {type: str; formate: "xxxx/xx/xx/xx:xx:xx"(str)}
+    groups: {type: [str, ...]} (list of url strings)
+    Returns a list to contain applied url strings.
+    '''
+    pass
+    # to be done before Jan 15
+
 
 if __name__ == '__main__':
     """
