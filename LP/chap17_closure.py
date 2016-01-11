@@ -1,4 +1,4 @@
-import matplotlib
+import matplotlib.pyplot as plt
 
 def makemovement(name, origin, pace):
     x = origin[0]
@@ -16,6 +16,9 @@ def makemovement(name, origin, pace):
         else:
             raise directionError
         print("%s's New position: (%d, %d)" % (name, x, y))
+        plt.plot(x, y, 'r')
+        plt.axis('scaled')
+        plt.axis('off')
     return movement
 
 if __name__ == "__main__":
@@ -25,3 +28,5 @@ if __name__ == "__main__":
     player_two('W')
     player_one('E')
     player_one('E')
+    plt.show()
+    
