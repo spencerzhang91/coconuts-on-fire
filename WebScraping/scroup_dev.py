@@ -107,20 +107,20 @@ def StartOperation(init_url:str, pages:int, filename:str)->None:
                                  authors[j].getText(),
                                  follows[j].getText(),
                                  lastres[j].getText()])
-            hasAuthor(target_author, authors[j]) # detect if target appeared  
+                result = hasAuthor('Raina', authors[j]) # detect if target appeared  
             except Exception as e:
                 print('Error occured on page %d line %d' % (i+1, j+1))
                 print(*[titles[j].getText(), authors[j].getText()])
                 print('error message:', e)
                 if url not in failure_urls:
                         failure_urls.append(url)
-                error_counter += 1     
+                error_counter += 1
     file.close()
     if error_counter:
         print('\nTotal failed topic number: %d topics!' % error_counter)
     return failure_urls
 
-def hasAuthor(person:str, tag:bs4.element.Tag)->None: # just a printer for now
+def hasAuthor(person:str, tag:bs4.element.Tag)->bool: # just a printer for now
     '''
     This function is an add-on function that check if the interested
     author appeared in the group which is currently under process. If
@@ -128,13 +128,14 @@ def hasAuthor(person:str, tag:bs4.element.Tag)->None: # just a printer for now
     process.
     '''
     if person == tag.text:
-        title = tag.parent.select('td > a[class=""]')[0]['title']
-        follows = tag.parent.select('td[class=""]')[0].text
-        lastres = tag.parent.select('td[class="time"]').text
-        url = tag.parent.select('td > a[class=""]')[0]['href']
+        print("######################Target found!!!##########################")
+        title = tag.parent.parent.select('td > a[class=""]')[0]['title']
+        follows = tag.parent.parent.select('td[class=""]')[0].text
+        lastres = tag.parent.parent.select('td[class="time"]')[0].text
+        url = tag.parent.parent.select('td > a[class=""]')[0]['href']
         print("[Found]%s %s %s %s %s" % (title, person, follows, lastres, url))
     else:
-        print("%s is not found in the given group!" % person)
+        return False
 
 
 def SearchDate(date:str, groups:list)->list:
@@ -155,10 +156,11 @@ if __name__ == '__main__':
     # The following is for development test:
     url_list = ['https://www.douban.com/group/tianhezufang/discussion?start=',
                 'http://www.douban.com/group/gz020/discussion?start=',
-                'http://www.douban.com/group/kaopulove/discussion?start=']
+                'http://www.douban.com/group/kaopulove/discussion?start=',
+                'http://www.douban.com/group/wexin/discussion?start=']
     
-    url = url_list[2]
-    pgm = 2
+    url = url_list[3]
+    pgm = 1241
     fln = "dev_test_file.csv"
     # url, pgm, fln = Initialization()
     failures = StartOperation(url, pgm, fln)
