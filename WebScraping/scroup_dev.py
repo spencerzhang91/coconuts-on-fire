@@ -59,7 +59,7 @@ def Initialization():
             break
     return (url, pagenum, filename)
 
-def getGroupName(soup: bs4.BeautifulSoup) -> str:
+def getGroupName(soup:bs4.BeautifulSoup)->str:
     """
     This function is a part of the scroup application, retriving
     group name from the topic table page.
@@ -68,7 +68,7 @@ def getGroupName(soup: bs4.BeautifulSoup) -> str:
                             > div[class="title"] > a')[0].getText()
     return groupname
 
-def StartOperation(init_url: str, pages: int, filename: str)->None:
+def StartOperation(init_url:str, pages:int, filename:str)->None:
     '''
     type init_url: str
     rtype: None
@@ -107,7 +107,7 @@ def StartOperation(init_url: str, pages: int, filename: str)->None:
                                  authors[j].getText(),
                                  follows[j].getText(),
                                  lastres[j].getText()])
-
+            hasAuthor(target_author, authors[j]) # detect if target appeared  
             except Exception as e:
                 print('Error occured on page %d line %d' % (i+1, j+1))
                 print(*[titles[j].getText(), authors[j].getText()])
@@ -120,16 +120,24 @@ def StartOperation(init_url: str, pages: int, filename: str)->None:
         print('\nTotal failed topic number: %d topics!' % error_counter)
     return failure_urls
 
-def SearchAuthor(person:str, tag:bs4.element.Tag) -> list:
+def hasAuthor(person:str, tag:bs4.element.Tag)->None: # just a printer for now
     '''
     This function is an add-on function that check if the interested
     author appeared in the group which is currently under process. If
     so, then the whole information will be saved along side with main
     process.
     '''
-    if person == tag
+    if person == tag.text:
+        title = tag.parent.select('td > a[class=""]')[0]['title']
+        follows = tag.parent.select('td[class=""]')[0].text
+        lastres = tag.parent.select('td[class="time"]').text
+        url = tag.parent.select('td > a[class=""]')[0]['href']
+        print("[Found]%s %s %s %s %s" % (title, person, follows, lastres, url))
+    else:
+        print("%s is not found in the given group!" % person)
 
-def SearchDate(date:str, groups:list) -> list:
+
+def SearchDate(date:str, groups:list)->list:
     '''
     This function should be capable of searching a douban group or multiple
     groups' topics within a certain time period or date.
