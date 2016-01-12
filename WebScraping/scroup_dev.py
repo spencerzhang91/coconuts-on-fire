@@ -82,7 +82,6 @@ def StartOperation(init_url: str, pages: int, filename: str)->None:
                 encoding='utf8')
     writer = csv.writer(file)
     for i in range(pages):
-        print('Scraping page %d...' % (i+1))
         url = init_url + str(num + perpage * i)
         res = requests.get(url)
         try:
@@ -91,6 +90,8 @@ def StartOperation(init_url: str, pages: int, filename: str)->None:
             print('There is a problem:', e)
     
         soup = bs4.BeautifulSoup(res.text, 'lxml')
+        groupname = getGroupName(soup)
+        print('Scraping page %d of %s...' % ((i+1), groupname))
         titles = soup.select('tr[class] > td[class="title"] > a[class=""]')
         authors = soup.select('tr[class] > td[nowrap="nowrap"] > a[class=""]')
         follows = soup.select('tr[class] > td[class=""]')
