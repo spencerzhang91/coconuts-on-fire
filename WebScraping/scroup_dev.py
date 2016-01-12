@@ -103,7 +103,6 @@ def StartOperation(init_url: str, pages: int, filename: str)->None:
         
         for j in range(len(titles)):
             try:
-
                 writer.writerow([titles[j]['title'],
                                  authors[j].getText(),
                                  follows[j].getText(),
@@ -128,7 +127,7 @@ def SearchAuthor(person:str, tag:bs4.element.Tag) -> list:
     so, then the whole information will be saved along side with main
     process.
     '''
-    testurl = group[0]
+    if person == tag
 
 def SearchDate(date:str, groups:list) -> list:
     '''
