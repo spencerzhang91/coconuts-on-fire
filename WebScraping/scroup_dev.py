@@ -159,7 +159,7 @@ if __name__ == '__main__':
                 'http://www.douban.com/group/kaopulove/discussion?start=',
                 'http://www.douban.com/group/wexin/discussion?start=']
     
-    url = url_list[3]
+    url = url_list[2]
     pgm = 1241
     fln = "dev_test_file.csv"
     # url, pgm, fln = Initialization()
