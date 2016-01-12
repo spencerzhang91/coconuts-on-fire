@@ -99,7 +99,7 @@ def StartOperation(init_url: str, pages: int, filename: str)->None:
         
         print('[page info]titles: %d authors: %d follows: %d lastres: %d' %
               (len(titles), len(authors), len(follows), len(lastres)))      
-        print('Saving page %d to cwd local file %s...' % (i+1, filename))
+        print('Saving page %d to desktop local file %s...' % (i+1, filename))
         
         for j in range(len(titles)):
             try:
@@ -121,18 +121,14 @@ def StartOperation(init_url: str, pages: int, filename: str)->None:
         print('\nTotal failed topic number: %d topics!' % error_counter)
     return failure_urls
 
-def SearchAuthor(person:str, groups:list) -> list:
+def SearchAuthor(person:str, tag:bs4.element.Tag) -> list:
     '''
-    This function should be capable of search a certain member of douban
-    in one or multiple group, see what topic he/she has posted.
-    This feature shall be running parellel with the main operation.
-    # Arguments
-    date: {type: str; formate: "xxxx/xx/xx/xx:xx:xx"(str)}
-    groups: {type: [str, ...]} (list of url strings)
-    Returns a list to contain applied url strings.
+    This function is an add-on function that check if the interested
+    author appeared in the group which is currently under process. If
+    so, then the whole information will be saved along side with main
+    process.
     '''
-    pass
-    # to be done before Jan 15
+    testurl = group[0]
 
 def SearchDate(date:str, groups:list) -> list:
     '''
