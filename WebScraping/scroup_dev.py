@@ -59,6 +59,14 @@ def Initialization():
             break
     return (url, pagenum, filename)
 
+def getGroupName(soup: bs4.BeautifulSoup) -> str:
+    """
+    This function is a part of the scroup application, retriving
+    group name from the topic table page.
+    """
+    groupname = soup.select('div > div > div[class="info"]\
+                            > div[class="title"] > a')[0].getText()
+    return groupname
 
 def StartOperation(init_url: str, pages: int, filename: str)->None:
     '''
