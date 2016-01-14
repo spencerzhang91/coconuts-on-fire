@@ -128,7 +128,7 @@ def hasAuthor(person:str, tag:bs4.element.Tag)->bool: # just a printer for now
     process.
     '''
     if person == tag.text:
-        print("######################Target found!!!##########################")
+        print("#######################Target found###########################")
         title = tag.parent.parent.select('td > a[class=""]')[0]['title']
         follows = tag.parent.parent.select('td[class=""]')[0].text
         lastres = tag.parent.parent.select('td[class="time"]')[0].text
