@@ -1,7 +1,7 @@
 # This project is for the freaking essay.
 # There are three functions defined here: batch_corr, batch_kappa and draw.
 
-data <- read.csv("J:\\用地建设规模论文\\dataset.csv")
+data <- read.csv("J:\\用地建设规模论文\\dataset.csv") # directory set to yours
 print(data)
 
 batch_corr <- function(table, ivcs, dvc)
@@ -45,3 +45,5 @@ vargroup_3 <- data[, 5:7]
 
 batch_corr(data, 1:7, 8)
 multicollinearity(data, vargroup_1, vargroup_2, vargroup_3)
+kappa(selectedFactors)
+
