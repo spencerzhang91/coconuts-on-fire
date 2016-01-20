@@ -11,4 +11,15 @@ for (i in 6:9)
   print(relativity)
 }
 
-batch_corr <- function(table, dvc)
+batch_corr <- function(table, ivcs, dvc)
+{
+    # table: data source csv file
+    # ivcs: independent variable column numbers
+    # dvc: dependent variable column number
+    # No return value(s)
+    for (i in ivcs)
+    {
+        relativity <- cor.test(data[,i], data[, dvc])
+        print(relativity)
+    }
+}
