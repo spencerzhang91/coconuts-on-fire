@@ -1,5 +1,6 @@
 # This project is for the freaking essay.
-# Jan 19 Tue
+# There are three functions defined here: batch_corr, batch_kappa and draw.
+
 data <- read.csv("J:\\用地建设规模论文\\density.csv")
 print(data)
 for (j in 1:3)
