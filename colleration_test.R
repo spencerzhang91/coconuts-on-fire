@@ -45,5 +45,5 @@ vargroup_3 <- data[, 5:7]
 
 batch_corr(data, 1:7, 8)
 multicollinearity(data, vargroup_1, vargroup_2, vargroup_3)
-kappa(selectedFactors)
+print(kappa(selectedFactors))
 
