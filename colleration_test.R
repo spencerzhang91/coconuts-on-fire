@@ -1,7 +1,7 @@
 # This project is for the freaking essay.
 # There are three functions defined here: batch_corr, batch_kappa and draw.
 
-data <- read.csv("J:\\鐢ㄥ湴寤鸿瑙勬ā璁烘枃\\dataset.csv")
+data <- read.csv("J:\\用地建设规模论文\\dataset.csv")
 print(data)
 
 batch_corr <- function(table, ivcs, dvc)
@@ -26,14 +26,19 @@ multicollinearity <- function(table, vg1, vg2, vg3)
     # vg1: independent variable group1 (population & constructed area)
     # vg2: independent variable group2 (3 compactness measurement indeces)
     # vg3: independent variable group3 (administrative indeces)
-    multicol <- kappa(c(vg1, vg2, vg3))
-    return (multicol)
+    multicol_all <- kappa(data.frame(vg1,vg2,vg3))
+    multicol_vg1 <- kappa(vg1)
+    multicol_vg2 <- kappa(vg2)
+    multicol_vg3 <- kappa(vg3)
+    
+    for (item in c(multicol_all, multicol_vg1, multicol_vg2, multicol_vg3))
+      print(item)
 }
 
 # callers
 vargroup_1 <- data[,1:2]
-vargroup_2 <- data[, 3:4]
-vargroup_3 <- data[, 5:7]
+vargroup_2 <- data[,3:4]
+vargroup_3 <- data[,5:7]
 
 batch_corr(data, 1:7, 8)
 multicollinearity(data, vargroup_1, vargroup_2, vargroup_3)
