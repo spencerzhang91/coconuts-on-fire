@@ -11,4 +11,4 @@ for (i in 6:9)
   print(relativity)
 }
 
-batch_corr <- function()
+batch_corr <- function(table, dvc)
