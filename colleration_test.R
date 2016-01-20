@@ -47,3 +47,7 @@ batch_corr(data, 1:7, 8)
 multicollinearity(data, vargroup_1, vargroup_2, vargroup_3)
 print(kappa(selectedFactors))
 
+# the argument type of lm function need to be benqoed
+lm(dependent~array(selectedFactors[1]) + 
+             array(selectedFactors[2]) +
+             array(selectedFactors[3]))
