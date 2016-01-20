@@ -13,7 +13,7 @@ batch_corr <- function(table, ivcs, dvc)
     # No return value(s)
     for (i in ivcs)
     {
-        relativity <- cor.test(data[,i], data[, dvc])
+        relativity <- cor.test(data[, i], data[, dvc])
         print(c(colnames(table)[i], colnames(table)[dvc])) 
         print(relativity)
     }
@@ -26,7 +26,7 @@ multicollinearity <- function(table, vg1, vg2, vg3)
     # vg1: independent variable group1 (population & constructed area)
     # vg2: independent variable group2 (3 compactness measurement indeces)
     # vg3: independent variable group3 (administrative indeces)
-    multicol_all <- kappa(data.frame(vg1,vg2,vg3))
+    multicol_all <- kappa(data.frame(vg1, vg2, vg3))
     multicol_vg1 <- kappa(vg1)
     multicol_vg2 <- kappa(vg2)
     multicol_vg3 <- kappa(vg3)
@@ -35,10 +35,13 @@ multicollinearity <- function(table, vg1, vg2, vg3)
       print(item)
 }
 
+selectedFactors <- data[,c(1, 3, 5)]
+dependent <- data[, 7]
+
 # callers
-vargroup_1 <- data[,1:2]
-vargroup_2 <- data[,3:4]
-vargroup_3 <- data[,5:7]
+vargroup_1 <- data[, 1:2]
+vargroup_2 <- data[, 3:4]
+vargroup_3 <- data[, 5:7]
 
 batch_corr(data, 1:7, 8)
 multicollinearity(data, vargroup_1, vargroup_2, vargroup_3)
