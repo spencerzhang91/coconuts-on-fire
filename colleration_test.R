@@ -3,13 +3,6 @@
 
 data <- read.csv("J:\\用地建设规模论文\\dataset.csv")
 print(data)
-for (j in 1:3)
-for (i in 6:9)
-{
-  print(c(colnames(data)[j], colnames(data)[i])) 
-  relativity <- cor.test(data[,j], data[,i])
-  print(relativity)
-}
 
 batch_corr <- function(table, ivcs, dvc)
 {
@@ -37,4 +30,10 @@ multicollinearity <- function(table, vg1, vg2, vg3)
     return (multicol)
 }
 
+# callers
+vargroup_1 <- data[,1:2]
+vargroup_2 <- data[, 3:4]
+vargroup_3 <- data[, 5:7]
+
 batch_corr(data, 1:7, 8)
+multicollinearity(data, vargroup_1, vargroup_2, vargroup_3)
