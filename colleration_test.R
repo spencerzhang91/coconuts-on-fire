@@ -1,6 +1,6 @@
 # This project is for the essay.
 library(car)
-data <- read.csv("J:\\用地建设规模论文\\dataset.csv") # directory set to yours
+data <- read.csv() # directory set to yours
 print(data)
 
 batch_corr <- function(table, ivcs, dvc)
