@@ -5,7 +5,7 @@
 
 # preparations
 library(car)
-data <- read.csv() # set your own directory of csv file
+data <- read.table(file.choose()) # set your own directory of csv file
 
 # functions defined below:
 batch_corr <- function(table, ivcs, dvc)
