@@ -1,5 +1,4 @@
-# This project is for the freaking essay.
-# There are three functions defined here: batch_corr, batch_kappa and draw.
+# This project is for the essay.
 library(car)
 data <- read.csv("J:\\用地建设规模论文\\dataset.csv") # directory set to yours
 print(data)
@@ -28,7 +27,7 @@ batch_linear <- function(table, ivcs, dvc)
     # No return value(s)
     for (i in ivcs)
     {
-        fit <- lm(table[, i] ~ table[, dvc])
+        fit <- lm(table[, dvc] ~ table[, i])
         print(summary(fit))
     }
 }
@@ -40,10 +39,10 @@ multicollinearity <- function(table, vg1, vg2, vg3)
     # vg1: independent variable group1 (population & constructed area)
     # vg2: independent variable group2 (3 compactness measurement indeces)
     # vg3: independent variable group3 (administrative indeces)
-    multicol_all <- kappa(data.frame(vg1, vg2, vg3))
-    multicol_vg1 <- kappa(vg1)
-    multicol_vg2 <- kappa(vg2)
-    multicol_vg3 <- kappa(vg3)
+    multicol_all <- kappa(cor(data.frame(vg1, vg2, vg3)))
+    multicol_vg1 <- kappa(cor(vg1))
+    multicol_vg2 <- kappa(cor(vg2))
+    multicol_vg3 <- kappa(cor(vg3))
     
     for (item in c(multicol_all, multicol_vg1, multicol_vg2, multicol_vg3))
       print(item)
@@ -103,7 +102,7 @@ batch_linear(data, 1:7, 8)
 print("=======multicollinearity=======")
 multicollinearity(data, vargroup_1, vargroup_2, vargroup_3)
 print("=======selectedFactors=======")
-print(kappa(selectedFactors))
+print(kappa(cor(selectedFactors), exact=T))
 print("=======multi-factor linear regression model=======")
 selected_multi_linear_inter(data, selected_num, 8)
 selected_multi_linear_no(data, selected_num, 8)
