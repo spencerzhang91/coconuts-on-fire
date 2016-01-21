@@ -1,6 +1,6 @@
 # This project is for the freaking essay.
 # There are three functions defined here: batch_corr, batch_kappa and draw.
-
+library(car)
 data <- read.csv("J:\\用地建设规模论文\\dataset.csv") # directory set to yours
 print(data)
 
@@ -47,7 +47,7 @@ batch_corr(data, 1:7, 8)
 multicollinearity(data, vargroup_1, vargroup_2, vargroup_3)
 print(kappa(selectedFactors))
 
-# the argument type of lm function need to be benqoed
-lm(dependent~array(selectedFactors[1]) + 
-             array(selectedFactors[2]) +
-             array(selectedFactors[3]))
+iv_dv <- data.frame(selectedFactors, dependent)
+cor(iv_dv)
+scatterplotMatrix(iv_dv, spread=FALSE, lty.smooth=2, main="Scatter Plot Matrix")
+scatterplotMatrix(data, spread=FALSE, lty.smooth=2, main="Scatter Plot Matrix")
