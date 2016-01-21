@@ -1,6 +1,5 @@
 # This project is for the freaking essay.
 # There are three functions defined here: batch_corr, batch_kappa and draw.
-
 data <- read.csv("J:\\用地建设规模论文\\dataset.csv") # directory set to yours
 print(data)
 
@@ -33,7 +32,6 @@ batch_linear <- function(table, ivcs, dvc)
     }
 }
 
-
 multicollinearity <- function(table, vg1, vg2, vg3)
 {
     # This function solves the multicollinearity problem
@@ -50,18 +48,21 @@ multicollinearity <- function(table, vg1, vg2, vg3)
       print(item)
 }
 
-
 selected_multi_linear <- function(table, selected, dvc)
 {
     # table: data source csv file
     # selected: selected independent varialbes number
     # dvc: dependent variable column number
     # No return value(s)
-    
+    m_model <- lm(table[, dvc] ~ table[, selected[1]] +
+                                 table[, selected[2]] +
+                                 table[, selected[3]])
+    print(summary(m_model))
 }
 
 # defines
 selectedFactors <- data[,c(1, 3, 5)]
+selected_num <- c(1, 3, 5) # selected independent variable column number
 dependent <- data[, 7]
 
 vargroup_1 <- data[, 1:2]
@@ -77,5 +78,7 @@ print("=======multicollinearity=======")
 multicollinearity(data, vargroup_1, vargroup_2, vargroup_3)
 print("=======selectedFactors=======")
 print(kappa(selectedFactors))
+print("=======multi-factor linear regression model=======")
+selected_multi_linear(data, selected_num, 8)
 
 iv_dv <- data.frame(selectedFactors, dependent)
