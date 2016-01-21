@@ -49,15 +49,31 @@ multicollinearity <- function(table, vg1, vg2, vg3)
       print(item)
 }
 
-selected_multi_linear <- function(table, selected, dvc)
+selected_multi_linear_inter <- function(table, selected, dvc)
 {
     # table: data source csv file
     # selected: selected independent varialbes number
     # dvc: dependent variable column number
     # No return value(s)
-    m_model <- lm(table[, dvc] ~ table[, selected[1]] +
-                                 table[, selected[2]] +
-                                 table[, selected[3]])
+    m_model <- lm(table[, dvc] ~ population +
+                                 adm_level_2 +
+                                 compactness_2,
+                                 data=table)
+    print(summary(m_model))
+    print(vif(m_model))
+    print(sqrt(vif(m_model)) > 2) # if there is any problem?
+}
+
+selected_multi_linear_no <- function(table, selected, dvc)
+{
+    # table: data source csv file
+    # selected: selected independent varialbes number
+    # dvc: dependent variable column number
+    # No return value(s)
+    m_model <- lm(table[, dvc] ~ 0 + population +
+                                 adm_level_2 +
+                                 compactness_2,
+                                 data=table)
     print(summary(m_model))
     print(vif(m_model))
     print(sqrt(vif(m_model)) > 2) # if there is any problem?
@@ -65,7 +81,9 @@ selected_multi_linear <- function(table, selected, dvc)
 
 correlence_ivs <- function(table, ivcs, dvc)
 {
-    
+    plot_data <- table[, c(dvc,ivcs)]
+    scatterplotMatrix(plot_data, spread=FALSE, lty.smooth=2,
+                      main="correlence matrix")
 }
 
 # defines
@@ -87,5 +105,8 @@ multicollinearity(data, vargroup_1, vargroup_2, vargroup_3)
 print("=======selectedFactors=======")
 print(kappa(selectedFactors))
 print("=======multi-factor linear regression model=======")
-selected_multi_linear(data, selected_num, 8)
+selected_multi_linear_inter(data, selected_num, 8)
+selected_multi_linear_no(data, selected_num, 8)
 
+# ploting area:
+correlence_ivs(data, selected_num, 8)
