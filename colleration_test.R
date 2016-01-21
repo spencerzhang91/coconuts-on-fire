@@ -22,6 +22,10 @@ batch_corr <- function(table, ivcs, dvc)
 batch_linear <- function(table, ivcs, dvc)
 {
     # simple linear regression
+    # table: data source csv file
+    # ivcs: independent variable column numbers
+    # dvc: dependent variable column number
+    # No return value(s)
     for (i in ivcs)
     {
         fit <- lm(table[, i] ~ table[, dvc])
@@ -46,6 +50,16 @@ multicollinearity <- function(table, vg1, vg2, vg3)
       print(item)
 }
 
+
+selected_multi_linear <- function(table, selected, dvc)
+{
+    # table: data source csv file
+    # selected: selected independent varialbes number
+    # dvc: dependent variable column number
+    # No return value(s)
+    
+}
+
 # defines
 selectedFactors <- data[,c(1, 3, 5)]
 dependent <- data[, 7]
@@ -59,7 +73,9 @@ print("=======correlence=======")
 batch_corr(data, 1:7, 8)
 print("=======Linear=======")
 batch_linear(data, 1:7, 8)
+print("=======multicollinearity=======")
 multicollinearity(data, vargroup_1, vargroup_2, vargroup_3)
+print("=======selectedFactors=======")
 print(kappa(selectedFactors))
 
 iv_dv <- data.frame(selectedFactors, dependent)
