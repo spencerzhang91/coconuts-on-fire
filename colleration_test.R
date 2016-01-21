@@ -1,6 +1,6 @@
 # This project is for the freaking essay.
 # There are three functions defined here: batch_corr, batch_kappa and draw.
-library(car)
+
 data <- read.csv("J:\\用地建设规模论文\\dataset.csv") # directory set to yours
 print(data)
 
@@ -24,9 +24,8 @@ batch_linear <- function(table, ivcs, dvc)
     # simple linear regression
     for (i in ivcs)
     {
-        fit <- lm(colnames(table)[i]~colnames(table)[dvc],
-                  data = table)
-        summary(fit)
+        fit <- lm(table[, i] ~ table[, dvc])
+        print(summary(fit))
     }
 }
 
@@ -47,19 +46,20 @@ multicollinearity <- function(table, vg1, vg2, vg3)
       print(item)
 }
 
+# defines
 selectedFactors <- data[,c(1, 3, 5)]
 dependent <- data[, 7]
 
-# callers
 vargroup_1 <- data[, 1:2]
 vargroup_2 <- data[, 3:4]
 vargroup_3 <- data[, 5:7]
 
+# callers
+print("=======correlence=======")
 batch_corr(data, 1:7, 8)
+print("=======Linear=======")
+batch_linear(data, 1:7, 8)
 multicollinearity(data, vargroup_1, vargroup_2, vargroup_3)
 print(kappa(selectedFactors))
 
 iv_dv <- data.frame(selectedFactors, dependent)
-cor(iv_dv)
-scatterplotMatrix(iv_dv, spread=FALSE, lty.smooth=2, main="Scatter Plot Matrix")
-scatterplotMatrix(data, spread=FALSE, lty.smooth=2, main="Scatter Plot Matrix")
