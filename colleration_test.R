@@ -1,5 +1,6 @@
 # This project is for the freaking essay.
 # There are three functions defined here: batch_corr, batch_kappa and draw.
+library(car)
 data <- read.csv("J:\\用地建设规模论文\\dataset.csv") # directory set to yours
 print(data)
 
@@ -58,6 +59,13 @@ selected_multi_linear <- function(table, selected, dvc)
                                  table[, selected[2]] +
                                  table[, selected[3]])
     print(summary(m_model))
+    print(vif(m_model))
+    print(sqrt(vif(m_model)) > 2) # if there is any problem?
+}
+
+correlence_ivs <- function(table, ivcs, dvc)
+{
+    
 }
 
 # defines
@@ -69,7 +77,7 @@ vargroup_1 <- data[, 1:2]
 vargroup_2 <- data[, 3:4]
 vargroup_3 <- data[, 5:7]
 
-# callers
+# result printing area:
 print("=======correlence=======")
 batch_corr(data, 1:7, 8)
 print("=======Linear=======")
@@ -81,4 +89,3 @@ print(kappa(selectedFactors))
 print("=======multi-factor linear regression model=======")
 selected_multi_linear(data, selected_num, 8)
 
-iv_dv <- data.frame(selectedFactors, dependent)
