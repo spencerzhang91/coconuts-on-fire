@@ -19,6 +19,18 @@ batch_corr <- function(table, ivcs, dvc)
     }
 }
 
+batch_linear <- function(table, ivcs, dvc)
+{
+    # simple linear regression
+    for (i in ivcs)
+    {
+        fit <- lm(colnames(table)[i]~colnames(table)[dvc],
+                  data = table)
+        summary(fit)
+    }
+}
+
+
 multicollinearity <- function(table, vg1, vg2, vg3)
 {
     # This function solves the multicollinearity problem
