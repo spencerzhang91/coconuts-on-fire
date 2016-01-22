@@ -96,7 +96,7 @@ def StartOperation(init_url:str, pages:int, filename:str)->None:
         authors = soup.select('tr[class] > td[nowrap="nowrap"] > a[class=""]')
         follows = soup.select('tr[class] > td[class=""]')
         lastres = soup.select('tr[class] > td[class="time"]')
-        
+        urls = soup.select('tr[class] > td > a[class=""]')
         print('[page info]titles: %d authors: %d follows: %d lastres: %d' %
               (len(titles), len(authors), len(follows), len(lastres)))      
         print('Saving page %d to desktop local file %s...' % (i+1, filename))
@@ -106,7 +106,8 @@ def StartOperation(init_url:str, pages:int, filename:str)->None:
                 writer.writerow([titles[j]['title'],
                                  authors[j].getText(),
                                  follows[j].getText(),
-                                 lastres[j].getText()])
+                                 lastres[j].getText(),
+                                 urls[j]['href']])
                 result = hasAuthor('Raina', authors[j]) # detect if target appeared  
             except Exception as e:
                 print('Error occured on page %d line %d' % (i+1, j+1))
@@ -148,7 +149,7 @@ def SearchDate(date:str, groups:list)->list:
     Returns a list to contain applied url strings.
     '''
     pass
-    # to be done before Jan 15
+    # to be done before Jan 25
 
 
 if __name__ == '__main__':
