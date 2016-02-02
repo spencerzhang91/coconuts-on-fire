@@ -4,9 +4,9 @@
 # The only thing have to be cautious about is to set column number correctly when calling functions.
 
 # preparations
-# library(car)
+library(car)
 file <- file.choose()
-data <- read.table(file) # set your own directory of csv file
+data <- read.csv(file) # set your own directory of csv file
 
 # functions defined below:
 batch_corr <- function(table, ivcs, dvc)
@@ -120,5 +120,7 @@ print(kappa(cor(selectedFactors), exact=T))
 print("=======multi-factor linear regression model=======")
 selected_multi_linear_inter(data, selected_num, 8)
 selected_multi_linear_no(data, selected_num, 8)
+
+print("All process successfully done.")
 
 # Feb 2nd tiny modifications for reuse.
