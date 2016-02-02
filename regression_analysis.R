@@ -34,6 +34,7 @@ batch_linear <- function(table, ivcs, dvc)
     for (i in ivcs)
     {
         fit <- lm(table[, dvc] ~ table[, i])
+        print(c(colnames(table)[i], colnames(table)[dvc]))
         print(summary(fit))
     }
 }
