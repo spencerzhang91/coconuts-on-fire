@@ -60,9 +60,9 @@ selected_multi_linear_inter <- function(table, selected, dvc)
     # selected: selected independent varialbes number
     # dvc: dependent variable column number
     # No return value(s)
-    m_model <- lm(table[, dvc] ~ population +
-                                 adm_level_2 +
-                                 compactness_2,
+    m_model <- lm(table[, dvc] ~ Scale_pop +
+                                 Admin_hierarchy +
+                                 Compact_da,
                                  data=table)
     print(summary(m_model))
     print(vif(m_model))
@@ -75,9 +75,9 @@ selected_multi_linear_no <- function(table, selected, dvc)
     # selected: selected independent varialbes number
     # dvc: dependent variable column number
     # No return value(s)
-    m_model <- lm(table[, dvc] ~ 0 + population +
-                                 adm_level_2 +
-                                 compactness_2,
+    m_model <- lm(table[, dvc] ~ 0 + Scale_pop +
+                                 Admin_hierarchy +
+                                 Compact_da,
                                  data=table)
     print(summary(m_model))
     print(vif(m_model))
