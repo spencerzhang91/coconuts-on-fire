@@ -105,7 +105,7 @@ opt_factors <- function(table, ivcs, dvc)
     # ivcs: independent variable column numbers
     # dvc: dependent variable column number
     # return the relatively best factors of a regression model (in column numbers)
-    # to be done
+    # to be done within Feb 3rd
 }
 
 # Some concerned variables:
