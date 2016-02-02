@@ -2,11 +2,12 @@
 # For using library car, the newest version of R is needed.
 # Still require some basic knowledge of R programming in order to reuse.
 # The only thing have to be cautious about is to set column number correctly when calling functions.
+# Feb 2nd: a new function is brought to schedule
 
 # preparations
 library(car)
 file <- file.choose()
-data <- read.csv(file) # set your own directory of csv file
+data <- read.csv(file)
 
 # functions defined below:
 batch_corr <- function(table, ivcs, dvc)
@@ -81,8 +82,7 @@ selected_multi_linear_no <- function(table, selected, dvc)
                                  Compact_da,
                                  data=table)
     # it used to omit the intercept on line 78 but warning messages appeared as follows:
-    # 'No intercept: vifs may not be sensible.'
-    # so I decided the code is changed (remove '0 +' before first IV)
+    # 'No intercept: vifs may not be sensible.' when doing VIF test
     print(summary(m_model))
     print(vif(m_model))
     print(sqrt(vif(m_model)) > 2) # if there is any problem?
@@ -97,6 +97,16 @@ correlence_ivs <- function(table, ivcs, dvc)
     plot_data <- table[, c(dvc,ivcs)]
     scatterplotMatrix(plot_data, spread=FALSE, lty.smooth=2,
                       main="correlence matrix")
+}
+
+# A function that decides what is the best IVs of a regression medel
+opt_factors <- function(table, ivcs, dvc)
+{
+    # table: data source csv file
+    # ivcs: independent variable column numbers
+    # dvc: dependent variable column number
+    # return the relatively best factors of a regression model
+    # to be done
 }
 
 # Some concerned variables:
@@ -124,7 +134,7 @@ print("=======selectedFactors=======")
 print(kappa(cor(selectedFactors), exact=T))
 
 print("=======multi-factor linear regression model=======")
-# selected_multi_linear_inter(data, selected_num, 8)
-# selected_multi_linear_no(data, selected_num, 8)
+selected_multi_linear_inter(data, selected_num, 8)
+selected_multi_linear_no(data, selected_num, 8)
 
 print("All process successfully done.")
