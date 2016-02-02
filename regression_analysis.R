@@ -99,13 +99,13 @@ correlence_ivs <- function(table, ivcs, dvc)
                       main="correlence matrix")
 }
 
-# A function that decides what is the best IVs of a regression medel
 opt_factors <- function(table, ivcs, dvc)
 {
+    # A function that decides what is the best IVs of a regression model
     # table: data source csv file
     # ivcs: independent variable column numbers
     # dvc: dependent variable column number
-    # return the relatively best factors of a regression model
+    # return the relatively best factors of a regression model (in column numbers)
     # to be done
 }
 
