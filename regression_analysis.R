@@ -128,5 +128,3 @@ print("=======multi-factor linear regression model=======")
 # selected_multi_linear_no(data, selected_num, 8)
 
 print("All process successfully done.")
-
-# Feb 2nd tiny modifications for reuse.
