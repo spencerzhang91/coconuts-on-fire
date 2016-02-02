@@ -1,7 +1,6 @@
 # This script is aimed at automaticly do a series of regression related analysises.
 # For using library car, the newest version of R is needed.
 # Still require some basic knowledge of R programming in order to reuse.
-# The only thing have to be cautious about is to set column number correctly when calling functions.
 # Feb 2nd: a new function is brought to schedule
 
 # preparations
