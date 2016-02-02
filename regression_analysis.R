@@ -108,6 +108,8 @@ vargroup_2 <- data[, 3:4]
 vargroup_3 <- data[, 5:7]
 
 # result printing area, to reuse edit the arguments of function according to need
+print("data source:")
+print(file)
 print("=======correlence=======")
 batch_corr(data, 1:7, 8)
 
