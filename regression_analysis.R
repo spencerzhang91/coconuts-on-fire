@@ -75,7 +75,7 @@ selected_multi_linear_no <- function(table, selected, dvc)
     # selected: selected independent varialbes number
     # dvc: dependent variable column number
     # No return value(s)
-    m_model <- lm(table[, dvc] ~ Scale_pop +
+    m_model <- lm(table[, dvc] ~ 0 + Scale_pop +
                                  Admin_hierarchy +
                                  Compact_da,
                                  data=table)
@@ -117,14 +117,14 @@ print("=======Linear=======")
 batch_linear(data, 1:7, 8)
 
 print("=======multicollinearity=======")
-multicollinearity(data, vargroup_1, vargroup_2, vargroup_3)
+# multicollinearity(data, vargroup_1, vargroup_2, vargroup_3)
 
 print("=======selectedFactors=======")
 print(kappa(cor(selectedFactors), exact=T))
 
 print("=======multi-factor linear regression model=======")
-selected_multi_linear_inter(data, selected_num, 8)
-selected_multi_linear_no(data, selected_num, 8)
+# selected_multi_linear_inter(data, selected_num, 8)
+# selected_multi_linear_no(data, selected_num, 8)
 
 print("All process successfully done.")
 
