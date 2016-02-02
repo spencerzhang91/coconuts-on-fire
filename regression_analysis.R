@@ -119,3 +119,5 @@ print(kappa(cor(selectedFactors), exact=T))
 print("=======multi-factor linear regression model=======")
 selected_multi_linear_inter(data, selected_num, 8)
 selected_multi_linear_no(data, selected_num, 8)
+
+# Feb 2nd tiny modifications for reuse.
