@@ -4,8 +4,9 @@
 # The only thing have to be cautious about is to set column number correctly when calling functions.
 
 # preparations
-library(car)
-data <- read.table(file.choose()) # set your own directory of csv file
+# library(car)
+file <- file.choose()
+data <- read.table(file) # set your own directory of csv file
 
 # functions defined below:
 batch_corr <- function(table, ivcs, dvc)
