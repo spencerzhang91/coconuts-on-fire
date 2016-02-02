@@ -75,10 +75,13 @@ selected_multi_linear_no <- function(table, selected, dvc)
     # selected: selected independent varialbes number
     # dvc: dependent variable column number
     # No return value(s)
-    m_model <- lm(table[, dvc] ~ 0 + Scale_pop +
+    m_model <- lm(table[, dvc] ~ Scale_pop +
                                  Admin_hierarchy +
                                  Compact_da,
                                  data=table)
+    # it used to omit the intercept on line 78 but warning messages appeared as follows:
+    # 'No intercept: vifs may not be sensible.'
+    # so I decided the code is changed (remove '0 +' before first IV)
     print(summary(m_model))
     print(vif(m_model))
     print(sqrt(vif(m_model)) > 2) # if there is any problem?
