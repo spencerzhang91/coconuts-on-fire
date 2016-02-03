@@ -1,0 +1,1 @@
+# determine the proper factors of a regression model
