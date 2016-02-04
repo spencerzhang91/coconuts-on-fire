@@ -1,5 +1,5 @@
 # determine the proper factors of a regression model
-ccombinations <- function(ivnum)
+count_combs <- function(ivnum)
 {
     # count the total number of possible combinations of ivnum ivs.
     # input: number of independent variables
@@ -11,4 +11,22 @@ ccombinations <- function(ivnum)
         count <- count + ncol(n)
     }
     return(count)
+}
+
+vif_combs <- function(table, ivs, dv)
+{
+    # table: source data table
+    # ivs: independent variable column number range
+    # dv: dependent variable column number
+    # return: calculate the vif of ivs combinations
+    # yet done
+}
+
+kappa_combs <- function(table, ivs, dv)
+{
+    # table: source data table
+    # ivs: independent variable column number range
+    # dv: dependent variable column number
+    # return: calculate the kappa of ivs combinations
+    # yet done   
 }
