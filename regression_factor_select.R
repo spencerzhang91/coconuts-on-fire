@@ -2,8 +2,8 @@
 count_combs <- function(ivnum)
 {
     # count the total number of possible combinations of ivnum ivs.
-    # input: number of independent variables
-    # output: number of possible combinations
+    # ivnum: number of independent variables
+    # return: number of possible combinations
     count <- 0
     for (i in 1:ivnum)
     {
