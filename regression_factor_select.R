@@ -1,4 +1,5 @@
 # determine the proper factors of a regression model
+# It seems that what I'm trying to do here was already done: step()
 # preparations
 library(car)
 file <- file.choose()
