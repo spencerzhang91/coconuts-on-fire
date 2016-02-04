@@ -10,7 +10,6 @@ def safe(pawns):
         if (guard_c1 in coords) or (guard_c2 in coords):
             safe_pawn += 1
     return safe_pawn
-            
     
 test = safe({'a1','b2','c2','c3','d2','d1'})
 print(test)
