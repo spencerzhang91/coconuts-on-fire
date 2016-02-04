@@ -1,4 +1,9 @@
 # determine the proper factors of a regression model
+# preparations
+library(car)
+file <- file.choose()
+data <- read.csv(file)
+
 count_combs <- function(ivnum)
 {
     # count the total number of possible combinations of ivnum ivs.
