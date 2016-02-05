@@ -96,7 +96,7 @@ def StartOperation(init_url:str, pages:int, filename:str)->None:
         authors = soup.select('tr[class] > td[nowrap="nowrap"] > a[class=""]')
         follows = soup.select('tr[class] > td[class=""]')
         lastres = soup.select('tr[class] > td[class="time"]')
-        urls = soup.select('tr[class] > td > a[class=""]')
+        urls = soup.select('tr[class] > td[class="title"] > a[class=""]')
         print('[page info]titles: %d authors: %d follows: %d lastres: %d' %
               (len(titles), len(authors), len(follows), len(lastres)))      
         print('Saving page %d to desktop local file %s...' % (i+1, filename))
@@ -161,7 +161,7 @@ if __name__ == '__main__':
                 'http://www.douban.com/group/wexin/discussion?start=']
     
     url = url_list[2]
-    pgm = 1241
+    pgm = 10
     fln = "dev_test_file.csv"
     # url, pgm, fln = Initialization()
     failures = StartOperation(url, pgm, fln)
