@@ -19,15 +19,6 @@ count_combs <- function(ivnum)
     return(count)
 }
 
-cor_combs <- function(table, ivs, dv)
-{
-    # table: source data table
-    # ivs: independent variable column number range
-    # dv: dependent variable column number
-    # return: ivs that significantly correlated to dv
-    # yet done
-}
-
 vif_combs <- function(table, ivs, dv)
 {
     # table: source data table
