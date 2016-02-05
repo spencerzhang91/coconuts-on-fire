@@ -19,20 +19,22 @@ count_combs <- function(ivnum)
     return(count)
 }
 
-vif_combs <- function(table, ivs, dv)
-{
-    # table: source data table
-    # ivs: independent variable column number range
-    # dv: dependent variable column number
-    # return: calculate the vif of ivs combinations
-    # yet done
-}
-
 kappa_combs <- function(table, ivs, dv)
 {
+    # return the valid iv combinations
     # table: source data table
     # ivs: independent variable column number range
     # dv: dependent variable column number
     # return: calculate the kappa of ivs combinations
     # yet done   
+}
+
+vif_combs <- function(table, ivs, dv)
+{
+    # return the valid iv combinations
+    # table: source data table
+    # ivs: independent variable column number range
+    # dv: dependent variable column number
+    # return: calculate the vif of ivs combinations
+    # yet done
 }
