@@ -31,12 +31,15 @@ count_combs <- function(ivs)
     # ivs: an array of iv column number that are of valid ivs
     # return: number of possible combinations
     count <- 0
+    combs <- NULL
     for (i in 1:length(ivs))
     {
         n <- combn(ivs, i)
+        combs <- c(combs, n)
         count <- count + ncol(n)
     }
-    return(count)
+    print("There are totally ", count, "valid combinations.")
+    return(combs)
 }
 
 kappa_combs <- function(table, ivs, dv)
