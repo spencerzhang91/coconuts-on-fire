@@ -8,7 +8,7 @@ data <- read.csv(file)
 # functions defined below:
 corr_check <- function(table, ivs, dv)
 {
-    # This function filter out ivs that not sig corr to dv
+    # This function filter out ivs that not sig corr to dv.
     # table: data source csv file
     # ivs: independent variable column numbers (in range)
     # dv: dependent variable column number
@@ -27,11 +27,11 @@ corr_check <- function(table, ivs, dv)
 
 count_combs <- function(ivs)
 {
-    # count the total number of possible combinations of ivnum ivs
-    # ivs: an array that contains the valid combination of ivs
+    # count the total number of possible combinations of ivs.
+    # ivs: an array of iv column number that are of valid ivs
     # return: number of possible combinations
     count <- 0
-    for (i in ivs)
+    for (i in 1:length(ivs))
     {
         n <- combn(ivs, i)
         count <- count + ncol(n)
