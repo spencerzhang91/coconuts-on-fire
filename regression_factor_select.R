@@ -25,20 +25,20 @@ corr_check <- function(table, ivs, dv)
     return(rest_ivs)
 }
 
-count_combs <- function(ivs)
+count_combs <- function(rest_ivs)
 {
     # count the total number of possible combinations of ivs.
-    # ivs: an array of iv column number that are of valid ivs
+    # rest_ivs: valid ivs that selected by function corr_check
     # return: number of possible combinations
     count <- 0
     combs <- NULL
-    for (i in 1:length(ivs))
+    for (i in 1:length(rest_ivs))
     {
-        n <- combn(ivs, i)
-        combs <- c(combs, n)
+        n <- combn(rest_ivs, i)
+        # combs <- c(combs, list(n)) here has problem!!!
         count <- count + ncol(n)
     }
-    print("There are totally ", count, "valid combinations.")
+    print(c("There are totally ", count, "valid combinations."))
     return(combs)
 }
 
