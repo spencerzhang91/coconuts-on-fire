@@ -5,6 +5,26 @@ library(car)
 file <- file.choose()
 data <- read.csv(file)
 
+# functions defined below:
+corr_check <- function(table, ivs, dv)
+{
+    # This function filter out ivs that not sig corr to dv.
+    # table: data source csv file
+    # ivs: independent variable column numbers (in range)
+    # dv: dependent variable column number
+    # No return value(s)
+    rest_ivs <- NULL
+    for (i in ivs)
+    {
+        relativity <- cor.test(data[, i], data[, dv])
+        p_val <- relativity$p.val
+        if (p_val < 0.005)
+            rest_ivs <- c(rest_ivs, i)
+        print(relativity)
+    }
+    return(rest_ivs)
+}
+
 count_combs <- function(ivnum)
 {
     # count the total number of possible combinations of ivnum ivs.
