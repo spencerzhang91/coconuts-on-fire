@@ -29,14 +29,14 @@ count_combs <- function(rest_ivs)
 {
     # count the total number of possible combinations of ivs.
     # rest_ivs: valid ivs that selected by function corr_check
-    # return: number of possible combinations
+    # return: a list
     count <- 0
-    combs <- NULL
+    combs <- list()
     for (i in 1:length(rest_ivs))
     {
         n <- combn(rest_ivs, i)
-        # combs <- c(combs, list(n)) here has problem!!!
         count <- count + ncol(n)
+        combs <- c(combs, list(n))
     }
     print(c("There are totally ", count, "valid combinations."))
     return(combs)
