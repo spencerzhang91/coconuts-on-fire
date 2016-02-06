@@ -38,7 +38,7 @@ count_combs <- function(rest_ivs)
         count <- count + ncol(n)
         combs <- c(combs, list(n))
     }
-    print(c("There are totally ", count, "valid combinations."))
+    cat("There are totally", count, "valid combinations.")
     return(combs)
 }
 
@@ -50,7 +50,16 @@ kappa_combs <- function(table, combs)
     # return: calculate the kappa of ivs combinations
     count <- 0
     combs <- list()
-
+    for (comb in combs)
+        for (col in 1:ncol(comb))
+        {
+            k_value <- kappa(corr(data[, col]))
+            if (k_value < 10)
+            {
+                combs <- c(combs, list(data[, col]))
+                cat("Comb:",data[, col], "kappa value", k_value)
+            }
+        }
 }
 
 vif_combs <- function(table, ivs, dv)
