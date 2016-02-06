@@ -49,17 +49,19 @@ kappa_combs <- function(table, combs)
     # combs: independent variable combination list
     # return: calculate the kappa of ivs combinations
     count <- 0
-    combs <- list()
+    result <- list()
     for (comb in combs)
         for (col in 1:ncol(comb))
         {
-            k_value <- kappa(corr(data[, col]))
+            k_value <- kappa(corr(table[, col]))
+            print(c("kappa value:", k_value))
             if (k_value < 10)
             {
-                combs <- c(combs, list(data[, col]))
-                cat("Comb:",data[, col], "kappa value", k_value)
+                result <- c(result, list(table[, col]))
+                print(c("Comb:",table[, col], "kappa value", k_value))
             }
         }
+    return(result)
 }
 
 vif_combs <- function(table, ivs, dv)
