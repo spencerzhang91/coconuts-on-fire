@@ -29,7 +29,7 @@ count_combs <- function(rest_ivs)
 {
     # count the total number of possible combinations of ivs.
     # rest_ivs: valid ivs that selected by function corr_check
-    # return: a list
+    # return: a list that contains iv combinations
     count <- 0
     combs <- list()
     for (i in 1:length(rest_ivs))
@@ -42,11 +42,11 @@ count_combs <- function(rest_ivs)
     return(combs)
 }
 
-kappa_combs <- function(table, ivs, dv)
+kappa_combs <- function(table, combs, dv)
 {
     # return the valid iv combinations
     # table: source data table
-    # ivs: independent variable column number range
+    # combs: independent variable combination list
     # dv: dependent variable column number
     # return: calculate the kappa of ivs combinations
     # yet done   
