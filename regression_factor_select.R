@@ -42,14 +42,15 @@ count_combs <- function(rest_ivs)
     return(combs)
 }
 
-kappa_combs <- function(table, combs, dv)
+kappa_combs <- function(table, combs)
 {
     # return the valid iv combinations
     # table: source data table
     # combs: independent variable combination list
-    # dv: dependent variable column number
     # return: calculate the kappa of ivs combinations
-    # yet done   
+    count <- 0
+    combs <- list()
+
 }
 
 vif_combs <- function(table, ivs, dv)
