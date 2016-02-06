@@ -53,7 +53,8 @@ kappa_combs <- function(table, combs)
     for (comb in combs)
         for (col in 1:ncol(comb))
         {
-            k_value <- kappa(corr(table[, col]))
+            print(comb[, col])
+            k_value <- kappa(cor(table[, comb[, col]]))
             print(c("kappa value:", k_value))
             if (k_value < 10)
             {
