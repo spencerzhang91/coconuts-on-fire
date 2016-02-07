@@ -73,7 +73,7 @@ kappa_combs_2 <- function(table, combs)
     # temperary test function
     for (matrix in combs)
         for (col in 1: ncol(matrix))
-            print(matrix[, col])
+            print(colnames(data)[matrix[, col]])
 }
 
 vif_combs <- function(table, ivs, dv)
