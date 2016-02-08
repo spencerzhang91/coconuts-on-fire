@@ -42,38 +42,24 @@ count_combs <- function(rest_ivs)
     return(combs)
 }
 
-kappa_combs <- function(table, combs)
+kappa_combs_2 <- function(table, combs)
 {
     # return the valid iv combinations
     # table: source data table
     # combs: independent variable combination list
     # return: calculate the kappa of ivs combinations
-    count <- 0
-    result <- list()
-    for (i in 1: length(combs))
-    {
-        print(combs[[i]])
-        for (col in 1:ncol(combs[[i]]))
-        {
-            test <- cor(table[, combs[[i]][, col]]) # error here!
-            k_value <- kappa(test)
-            print(c("kappa value:", k_value))
-            if (k_value < 10)
-            {
-                result <- c(result, list(table[, col]))
-                print(c("Comb:",table[, col], "kappa value", k_value))
-            }
-        }
-    }
-    return(result)
-}
-
-kappa_combs_2 <- function(table, combs)
-{
-    # temperary test function
+    # Main functionality done!
     for (matrix in combs)
         for (col in 1: ncol(matrix))
+        {
             print(colnames(data)[matrix[, col]])
+            comb_data <- table[, matrix[, col]]
+            if (class(comb_data) != "numeric")
+            {
+                kappa_val <- kappa(cor(comb_data))
+                print(kappa_val)
+            }
+        }
 }
 
 vif_combs <- function(table, ivs, dv)
