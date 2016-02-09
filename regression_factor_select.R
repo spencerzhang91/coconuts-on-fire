@@ -81,6 +81,18 @@ vif_combs <- function(table, ivs, dv)
     # yet done
 }
 
+linear_model_check <- function(table, selected, dvc)
+{
+    # yet done
+    m_model <- lm(table[, dvc] ~ Scale_pop +
+                                 Admin_hierarchy +
+                                 Compact_da,
+                                 data=table)
+    print(summary(m_model))
+    print(vif(m_model))
+    print(sqrt(vif(m_model)) > 2)
+}
+
 #-------------------# Test area #-------------------#
 
 c1 <- corr_check(data, 1:7, 8) # set column range to proper then run
