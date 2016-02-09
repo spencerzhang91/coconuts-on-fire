@@ -12,7 +12,7 @@ corr_check <- function(table, ivs, dv)
     # table: data source csv file
     # ivs: independent variable column numbers (in range)
     # dv: dependent variable column number
-    # No return value(s)
+    # return the valid ivs (column numbers of table)
     rest_ivs <- NULL
     for (i in ivs)
     {
@@ -27,9 +27,9 @@ corr_check <- function(table, ivs, dv)
 
 count_combs <- function(rest_ivs)
 {
-    # count the total number of possible combinations of ivs.
+    # count the total number of possible COMBINATIONS of ivs.
     # rest_ivs: valid ivs that selected by function corr_check
-    # return: a list that contains iv combinations
+    # return: a list that contains iv COMBINATIONS
     count <- 0
     combs <- list()
     for (i in 1:length(rest_ivs))
@@ -44,22 +44,31 @@ count_combs <- function(rest_ivs)
 
 kappa_combs_2 <- function(table, combs)
 {
-    # return the valid iv combinations
+    # return the valid iv COMBINATIONS
     # table: source data table
     # combs: independent variable combination list
-    # return: calculate the kappa of ivs combinations
+    # return: calculate the kappa of ivs COMBINATIONS
     # Main functionality done!
+    cnt <- 0
+    res_combs <- list()
     for (matrix in combs)
         for (col in 1: ncol(matrix))
         {
-            print(colnames(data)[matrix[, col]])
+            # print(colnames(data)[matrix[, col]])
             comb_data <- table[, matrix[, col]]
             if (class(comb_data) != "numeric")
             {
                 kappa_val <- kappa(cor(comb_data))
-                print(kappa_val)
+                if (kappa_val < 10)
+                {
+                    res_combs <- c(res_combs, list(comb_data))
+                    cnt <- cnt + 1
+                    print(c(colnames(data)[matrix[, col]], kappa_val))
+                }
             }
         }
+    print(c("Total vilid combination number:", cnt))
+    return(res_combs)
 }
 
 vif_combs <- function(table, ivs, dv)
@@ -70,5 +79,10 @@ vif_combs <- function(table, ivs, dv)
     # dv: dependent variable column number
     # return: calculate the vif of ivs combinations
     # yet done
-
 }
+
+#-------------------# Test area #-------------------#
+
+c1 <- corr_check(data, 1:7, 8) # set column range to proper then run
+c2 <- count_combs(c1)
+c3 <- kappa_combs_2(data, c2)
