@@ -81,10 +81,10 @@ vif_combs <- function(table, ivs, dv)
     # yet done
 }
 
-linear_model_check <- function(table, selected, dvc)
+linear_model_check <- function(table, combs, dv)
 {
     # yet done
-    m_model <- lm(table[, dvc] ~ Scale_pop +
+    m_model <- lm(table[, dv] ~ Scale_pop +
                                  Admin_hierarchy +
                                  Compact_da,
                                  data=table)
@@ -98,3 +98,5 @@ linear_model_check <- function(table, selected, dvc)
 c1 <- corr_check(data, 1:7, 8) # set column range to proper then run
 c2 <- count_combs(c1)
 c3 <- kappa_combs_2(data, c2)
+
+# This entire code is proved useless. The step function is much better!
