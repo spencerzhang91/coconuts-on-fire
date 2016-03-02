@@ -3,7 +3,7 @@
 # Should be able to scrape [topic,author,follow,lastresponse]
 # info of all group topics
 import requests, bs4, csv
-import date
+import datetime
 
 class CSVfileNameError(Exception):
     def __str__(self):
@@ -161,11 +161,12 @@ if __name__ == '__main__':
     url_list = ['https://www.douban.com/group/tianhezufang/discussion?start=',
                 'http://www.douban.com/group/gz020/discussion?start=',
                 'http://www.douban.com/group/kaopulove/discussion?start=',
-                'http://www.douban.com/group/wexin/discussion?start=']
+                'http://www.douban.com/group/wexin/discussion?start=',
+                'https://www.douban.com/group/yuexiuzufang/discussion?start=']
     
-    url = url_list[2]
-    pgm = 10
-    fln = "dev_test_file.csv"
+    url = url_list[4]
+    pgm = 20
+    fln = "yuexiuzufang.csv"
     # url, pgm, fln = Initialization()
     failures = StartOperation(url, pgm, fln)
     if failures:
