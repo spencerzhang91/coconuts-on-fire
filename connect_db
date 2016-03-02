@@ -1,0 +1,4 @@
+import psycopg2
+
+conn = psycopg2.connect(database="Games", user="postgre", password="123456")
+cur = conn.cursor()

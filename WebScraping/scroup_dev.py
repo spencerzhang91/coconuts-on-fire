@@ -3,6 +3,8 @@
 # Should be able to scrape [topic,author,follow,lastresponse]
 # info of all group topics
 import requests, bs4, csv
+import date
+
 class CSVfileNameError(Exception):
     def __str__(self):
         return 'Invalid file name, please add .csv at the end of name.'
@@ -77,8 +79,7 @@ def StartOperation(init_url:str, pages:int, filename:str)->None:
     error_counter = 0
     perpage = 25
     failure_urls = []
-    file = open(r'C:\Users\spencer\Desktop\%s' % filename,
-                'w', newline='',
+    file = open(r'C:\Users\spencer\Desktop\%s' % filename, 'w', newline='',
                 encoding='utf8')
     writer = csv.writer(file)
     for i in range(pages):
@@ -108,7 +109,9 @@ def StartOperation(init_url:str, pages:int, filename:str)->None:
                                  follows[j].getText(),
                                  lastres[j].getText(),
                                  urls[j]['href']])
-                result = hasAuthor('Raina', authors[j]) # detect if target appeared  
+
+                # detect if target appeared
+                result = hasAuthor('Raina', authors[j])  
             except Exception as e:
                 print('Error occured on page %d line %d' % (i+1, j+1))
                 print(*[titles[j].getText(), authors[j].getText()])
