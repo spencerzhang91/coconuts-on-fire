@@ -2,8 +2,11 @@
 # This script is created for scraping douban group topics
 # Should be able to scrape [topic,author,follow,lastresponse]
 # info of all group topics
+# TODO: reorganize this long code into classes.
+
 import requests, bs4, csv
 import datetime
+import time
 
 class CSVfileNameError(Exception):
     def __str__(self):
@@ -84,11 +87,12 @@ def StartOperation(init_url:str, pages:int, filename:str)->None:
     writer = csv.writer(file)
     for i in range(pages):
         url = init_url + str(num + perpage * i)
-        res = requests.get(url)
         try:
-            res.raise_for_status()
+            res = requests.get(url)
         except Exception as e:
             print('There is a problem:', e)
+            time.sleep(10)
+            continue
     
         soup = bs4.BeautifulSoup(res.text, 'lxml')
         groupname = getGroupName(soup)
@@ -162,11 +166,12 @@ if __name__ == '__main__':
                 'http://www.douban.com/group/gz020/discussion?start=',
                 'http://www.douban.com/group/kaopulove/discussion?start=',
                 'http://www.douban.com/group/wexin/discussion?start=',
-                'https://www.douban.com/group/yuexiuzufang/discussion?start=']
+                'https://www.douban.com/group/yuexiuzufang/discussion?start=',
+                'https://www.douban.com/group/gz020/discussion?start=']
     
-    url = url_list[4]
+    url = url_list[5]
     pgm = 20
-    fln = "yuexiuzufang.csv"
+    fln = "gzzufang.csv"
     # url, pgm, fln = Initialization()
     failures = StartOperation(url, pgm, fln)
     if failures:
