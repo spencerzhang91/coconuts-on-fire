@@ -7,7 +7,9 @@
 import requests, bs4, csv
 import datetime
 import time
-
+import psycopg2
+conn = psycopg2.connect("dbname='shop' user='postgres' "
+                        "host='localhost' password='123456'")
 class CSVfileNameError(Exception):
     def __str__(self):
         return 'Invalid file name, please add .csv at the end of name.'
