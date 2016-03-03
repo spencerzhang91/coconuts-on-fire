@@ -27,5 +27,6 @@ def ordinal(number: int):
             return str(number) + 'th'
 
 if __name__ == "__main__":
-    for i in range(105):
-        print(ordinal(i))
+    for i in range(10005):
+        ordinal(i)
+
