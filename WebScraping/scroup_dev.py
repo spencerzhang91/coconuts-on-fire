@@ -74,7 +74,7 @@ def getGroupName(soup:bs4.BeautifulSoup)->str:
                             > div[class="title"] > a')[0].getText()
     return groupname
 
-def startOperation(init_url:str, pages:int, filename:str)->None:
+def startOperation(init_url:str, pages:int, filename:str, headers:dict):
     '''
     type init_url: str
     rtype: None
@@ -83,21 +83,29 @@ def startOperation(init_url:str, pages:int, filename:str)->None:
     error_counter = 0
     perpage = 25
     failure_urls = []
+    # proxy config
+    proxies = {'http': 'https://163.177.79.5:80'}
     file = open(r'C:\Users\spencer\Desktop\%s' % filename, 'w', newline='',
                 encoding='utf8')
     writer = csv.writer(file)
     for i in range(pages):
         url = init_url + str(num + perpage * i)
+        time.sleep(0.5)
+        res = requests.get(url, proxies=proxies)
+        if res.status_code != 200:
+            print('403!')
+            break
         try:
-            res = requests.get(url)
+            res.raise_for_status()
         except Exception as e:
             print('There is a problem:', e)
+            print('Waiting 10 seconds to recover...')
             time.sleep(10)
+            i -= 1
             continue
     
         soup = bs4.BeautifulSoup(res.text, 'lxml')
-        groupname = getGroupName(soup)
-        print('Scraping page %d of %s...' % ((i+1), groupname))
+        print('Scraping page %d...' % (i+1))
         titles = soup.select('tr[class] > td[class="title"] > a[class=""]')
         authors = soup.select('tr[class] > td[nowrap="nowrap"] > a[class=""]')
         follows = soup.select('tr[class] > td[class=""]')
@@ -116,7 +124,7 @@ def startOperation(init_url:str, pages:int, filename:str)->None:
                                  urls[j]['href']])
 
                 # detect if target appeared
-                result = hasAuthor('Raina', authors[j])  
+                result = hasAuthor('小兔子乖', authors[j])  
             except Exception as e:
                 print('Error occured on page %d line %d' % (i+1, j+1))
                 print(*[titles[j].getText(), authors[j].getText()])
@@ -158,16 +166,20 @@ def searchDate(date:str, groups:list)->list:
     '''
     raise NotImplementedError
 
-
+"""
 def insertData(row:list):
     '''
     This function insert a row of data in douban group topic table into local
     PostgreSQL database.
     '''
-    conn = psycopg2.connect("dbname='douban' user='postgres' "
-                        "host='localhost' password='123456'")
+    conn = psycopg2.connect(database='shop', user='postgres',
+                            host='localhost', password='123456')
     cur = conne.cursor()
     # TODO: finish this function
+    cur.excute("INSERT INTO xiaozu VALUES (%d, %s, %s, %d, %s, %s)" % (row[0],
+                                       row[1], row[2], row[3], row[4], row[5])
+              )
+"""
 
 
 if __name__ == '__main__':
@@ -179,14 +191,21 @@ if __name__ == '__main__':
                 'https://www.douban.com/group/yuexiuzufang/discussion?start=',
                 'https://www.douban.com/group/gz020/discussion?start=']
     
-    url = url_list[5]
-    pgm = 20
+    url = url_list[1]
+    pgm = 25704
     fln = "gzzufang.csv"
+    header = {}
     # url, pgm, fln = initialization()
-    failures = startOperation(url, pgm, fln)
+    start = time.clock()
+    failures = startOperation(url, pgm, fln, header)
     if failures:
         print('[The urls below occured problem]:')
         for item in failures:
             print(item)
     else:
         print('All pages successfully scraped!')
+    end = time.clock()
+    total_time = end - start
+    m , s = divmod(total_time, 60)
+    h , m = divmod(m, 60)
+    print ("It takes %d hours %d minutes %.2f seconds." % (h, m, s))
