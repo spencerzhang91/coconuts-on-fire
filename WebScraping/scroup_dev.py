@@ -8,8 +8,7 @@ import requests, bs4, csv
 import datetime
 import time
 import psycopg2
-conn = psycopg2.connect("dbname='shop' user='postgres' "
-                        "host='localhost' password='123456'")
+
 class CSVfileNameError(Exception):
     def __str__(self):
         return 'Invalid file name, please add .csv at the end of name.'
@@ -30,7 +29,7 @@ def showfunc(l1, l2, l3, l4):
                l3[i].getText(),
                l4[i].getText()))
 
-def Initialization():
+def initialization():
     '''
     This function asks user to input the needed initialization
     informations of the scraping mission.
@@ -67,15 +66,15 @@ def Initialization():
     return (url, pagenum, filename)
 
 def getGroupName(soup:bs4.BeautifulSoup)->str:
-    """
+    '''
     This function is a part of the scroup application, retriving
     group name from the topic table page.
-    """
+    '''
     groupname = soup.select('div > div > div[class="info"]\
                             > div[class="title"] > a')[0].getText()
     return groupname
 
-def StartOperation(init_url:str, pages:int, filename:str)->None:
+def startOperation(init_url:str, pages:int, filename:str)->None:
     '''
     type init_url: str
     rtype: None
@@ -148,7 +147,7 @@ def hasAuthor(person:str, tag:bs4.element.Tag)->bool: # just a printer for now
         return False
 
 
-def SearchDate(date:str, groups:list)->list:
+def searchDate(date:str, groups:list)->list:
     '''
     This function should be capable of searching a douban group or multiple
     groups' topics within a certain time period or date.
@@ -157,12 +156,21 @@ def SearchDate(date:str, groups:list)->list:
     groups: {type: [str, ...]} (list of url strings)
     Returns a list to contain applied url strings.
     '''
-    pass
-    # to be done before Jan 25
+    raise NotImplementedError
+
+
+def insertData(row:list):
+    '''
+    This function insert a row of data in douban group topic table into local
+    PostgreSQL database.
+    '''
+    conn = psycopg2.connect("dbname='douban' user='postgres' "
+                        "host='localhost' password='123456'")
+    cur = conne.cursor()
+    # TODO: finish this function
 
 
 if __name__ == '__main__':
-
     # The following is for development test:
     url_list = ['https://www.douban.com/group/tianhezufang/discussion?start=',
                 'http://www.douban.com/group/gz020/discussion?start=',
@@ -174,8 +182,8 @@ if __name__ == '__main__':
     url = url_list[5]
     pgm = 20
     fln = "gzzufang.csv"
-    # url, pgm, fln = Initialization()
-    failures = StartOperation(url, pgm, fln)
+    # url, pgm, fln = initialization()
+    failures = startOperation(url, pgm, fln)
     if failures:
         print('[The urls below occured problem]:')
         for item in failures:
