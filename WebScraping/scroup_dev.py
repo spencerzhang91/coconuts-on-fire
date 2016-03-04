@@ -84,7 +84,8 @@ def startOperation(init_url:str, pages:int, filename:str, headers:dict):
     perpage = 25
     failure_urls = []
     # proxy config
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0",
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) "
+                                                "Gecko/20100101 Firefox/43.0",
                "Connection": "keep-alive"
                }
     proxies = {'http':'http://192.99.246.183:9000'}
@@ -127,7 +128,7 @@ def startOperation(init_url:str, pages:int, filename:str, headers:dict):
                                  urls[j]['href']])
 
                 # detect if target appeared
-                result = hasAuthor('小兔子乖', authors[j])  
+                result = hasAuthor('spencer', authors[j])  
             except Exception as e:
                 print('Error occured on page %d line %d' % (i+1, j+1))
                 print(*[titles[j].getText(), authors[j].getText()])
@@ -196,7 +197,7 @@ if __name__ == '__main__':
                 'https://www.douban.com/group/gz020/discussion?start=']
     
     url = url_list[2]
-    pgm = 25704
+    pgm = 2
     fln = "gzzufang.csv"
     header = {}
     # url, pgm, fln = initialization()
@@ -213,3 +214,4 @@ if __name__ == '__main__':
     m , s = divmod(total_time, 60)
     h , m = divmod(m, 60)
     print ("It takes %d hours %d minutes %.2f seconds." % (h, m, s))
+    # The main problem right now is the speed.
