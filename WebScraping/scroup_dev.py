@@ -84,14 +84,17 @@ def startOperation(init_url:str, pages:int, filename:str, headers:dict):
     perpage = 25
     failure_urls = []
     # proxy config
-    proxies = {'http': 'https://163.177.79.5:80'}
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0",
+               "Connection": "keep-alive"
+               }
+    proxies = {'http':'http://192.99.246.183:9000'}
     file = open(r'C:\Users\spencer\Desktop\%s' % filename, 'w', newline='',
                 encoding='utf8')
     writer = csv.writer(file)
     for i in range(pages):
         url = init_url + str(num + perpage * i)
-        time.sleep(0.5)
-        res = requests.get(url, proxies=proxies)
+        # time.sleep(0.1)
+        res = requests.get(url, headers=headers)
         if res.status_code != 200:
             print('403!')
             break
@@ -132,6 +135,7 @@ def startOperation(init_url:str, pages:int, filename:str, headers:dict):
                 if url not in failure_urls:
                         failure_urls.append(url)
                 error_counter += 1
+        print('page wrote.')
     file.close()
     if error_counter:
         print('\nTotal failed topic number: %d topics!' % error_counter)
@@ -191,7 +195,7 @@ if __name__ == '__main__':
                 'https://www.douban.com/group/yuexiuzufang/discussion?start=',
                 'https://www.douban.com/group/gz020/discussion?start=']
     
-    url = url_list[1]
+    url = url_list[2]
     pgm = 25704
     fln = "gzzufang.csv"
     header = {}
