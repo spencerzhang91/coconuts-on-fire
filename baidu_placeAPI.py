@@ -8,9 +8,9 @@ import requests, json
 
 key = "IniXfqhsWAyZQpkmh5FtEVv0"
 city = "韶关"
-place = "餐厅"
+query = "餐厅"
 
 api_url = ("http://api.map.baidu.com/place/v2/search" +
-          "?q=%s&region=%d&output=json&ak=%d" % (query, city, key))
+          "?q=%s&region=%s&output=json&ak=%s" % (query, city, key))
 
-print(api_url)
+print(len(api_url))
