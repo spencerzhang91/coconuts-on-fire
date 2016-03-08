@@ -5,7 +5,7 @@ This API can be called maximum 2000 times per day.
 """
 
 import requests, json
-import psycopg2
+# import psycopg2
 
 mykey = "IniXfqhsWAyZQpkmh5FtEVv0" # my developer key
 city = "韶关"
@@ -15,7 +15,8 @@ coor1 = (39.915, 116.404)
 coor2 = (39.975, 116.414)
 radius = 500 # meters
 
-payload_city = {
+city_params = {
+    # parameters for place api
     'ak': mykey,
     'output': 'json',
     'query': place,
@@ -25,9 +26,10 @@ payload_city = {
     'region': city
 }
 
-payload_rect = {
+rect_params = {
+    # parameters for place api
     'ak': mykey,
-    'output': json,
+    'output': 'json',
     'query': place,
     'page_size': 10,
     'page_num': 0,
@@ -37,20 +39,29 @@ payload_rect = {
     'radius': radius
 }
 
-payload_circ = {
+circ_params = {
+    # parameters for place api
     'ak': mykey,
-    'output': json,
+    'output': 'json',
     'query': place,
     'page_size': 10,
     'page_num': 0,
     'scope': 2,
 }
 
-baseAPI = "http://api.map.baidu.com/place/v2/search"
+geocoder_params = {
+    # parameters for geocoder api
+    'ak': mykey,
+    'output': 'json',
+    'address': None
+}
 
-res_city = requests.get(baseAPI, params=payload_city)
-res_rect = requests.get(baseAPI, params=payload_rect)
-res_circ = requests.get(baseAPI, params=payload_circ)
+placeAPI = "http://api.map.baidu.com/place/v2/search"
+geocoder = "http://api.map.baidu.com/geocoder/v2/"
+
+res_city = requests.get(placeAPI, params=city_params)
+res_rect = requests.get(placeAPI, params=rect_params)
+res_circ = requests.get(placeAPI, params=circ_params)
 
 # print(res_city.url)
 
@@ -64,4 +75,8 @@ def addr2corr(address: str)->tuple:
     '''
     This function converts address to a (longitude, latitude) coordinate.
     '''
-    raise NotImplementedError
+    print(geocoder_params)
+
+if __name__ == '__main__':
+
+    addr2corr("广州市天河区华南理工大学")
