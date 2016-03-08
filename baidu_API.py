@@ -32,7 +32,7 @@ payload_rect = {
     'page_size': 10,
     'page_num': 0,
     'scope': 2,
-    'bounds': "%s, %s, %s, %s" % (*cord1, *cord2)
+    'bounds': "%s, %s, %s, %s" % (*cord1, *cord2),
     'location': cord1,
     'radius': radius
 }
@@ -52,7 +52,9 @@ res_city = requests.get(baseAPI, params=payload_city)
 res_rect = requests.get(baseAPI, params=payload_rect)
 res_circ = requests.get(baseAPI, params=payload_circ)
 
+# print(res_city.url)
+
 jsonobj = json.loads(res_city.text)
 print(type(jsonobj))
-print(type(res.text))
+print(type(res_city.text))
 print(json.dumps(jsonobj, sort_keys=False, indent=4))
