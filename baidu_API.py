@@ -46,10 +46,13 @@ payload_circ = {
     'scope': 2,
 }
 
-basicAPI = "http://api.map.baidu.com/place/v2/search"
+baseAPI = "http://api.map.baidu.com/place/v2/search"
 
-res = requests.get(basicAPI, params=payload_city)
-jsonobj = json.loads(res.text)
+res_city = requests.get(baseAPI, params=payload_city)
+res_rect = requests.get(baseAPI, params=payload_rect)
+res_circ = requests.get(baseAPI, params=payload_circ)
+
+jsonobj = json.loads(res_city.text)
 print(type(jsonobj))
 print(type(res.text))
 print(json.dumps(jsonobj, sort_keys=False, indent=4))
