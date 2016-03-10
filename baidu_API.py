@@ -75,8 +75,14 @@ def addr2corr(address: str)->tuple:
     '''
     This function converts address to a (longitude, latitude) coordinate.
     '''
-    print(geocoder_params)
+    geocoder_params['address'] = address
+    res = requests.get(geocoder, params=geocoder_params)
+    res.raise_for_status()
+    coor = json.loads(requests.get(geocoder, params=geocoder_params).text)
+    print(coor)
+
+
 
 if __name__ == '__main__':
 
-    addr2corr("广州市天河区华南理工大学")
+    addr2corr("天安门")
