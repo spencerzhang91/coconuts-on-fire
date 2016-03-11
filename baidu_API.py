@@ -80,9 +80,14 @@ def addr2corr(address: str)->tuple:
     res.raise_for_status()
     coor = json.loads(requests.get(geocoder, params=geocoder_params).text)
     print(coor)
-
+    if coor['status'] == 0:
+        location = coor['result']['location']
+        return (location['lng'], location['lat'])
+    else:
+        return None
 
 
 if __name__ == '__main__':
 
-    addr2corr("天安门")
+    cor = addr2corr("天安门")
+    print("cor = ", cor)
