@@ -75,7 +75,7 @@ print(type(res_city.text))
 # print(json.dumps(jsonobj, sort_keys=False, indent=4))
 
 # Below this line defines a series of Baidu geo-data API calling functions
-def addr2corr(addresses: str)->tuple:
+def addr2coor(addresses: str)->tuple:
     '''
     This function converts addresses to a (longitude, latitude) coordinate.
     '''
@@ -87,14 +87,18 @@ def addr2corr(addresses: str)->tuple:
         # print(coor)
         if coor['status'] == 0:
             location = coor['result']['location']
-            yield (location['lng'], location['lat'])
+            yield (address, location['lng'], location['lat'])
         else:
             raise ConvertFailure
 
 
+def rescounter(resnum: int)->tuple:
+    """A addr2coor wraper"""
+    pass
+
 if __name__ == '__main__':
 
     address_list = ["天安门", "故宫", "奥林匹克公园", "广州塔"]
-    cor = addr2corr(address_list)
+    cor = addr2coor(address_list)
     for item in cor:
         print(item)
