@@ -6,6 +6,10 @@ This API can be called maximum 2000 times per day.
 
 import requests, json
 # import psycopg2
+class ConvertFailure(Exception):
+    def __str__(self):
+        return "Convertion Failed."
+
 
 mykey = "IniXfqhsWAyZQpkmh5FtEVv0" # my developer key
 city = "韶关"
@@ -71,23 +75,26 @@ print(type(res_city.text))
 # print(json.dumps(jsonobj, sort_keys=False, indent=4))
 
 # Below this line defines a series of Baidu geo-data API calling functions
-def addr2corr(address: str)->tuple:
+def addr2corr(addresses: str)->tuple:
     '''
-    This function converts address to a (longitude, latitude) coordinate.
+    This function converts addresses to a (longitude, latitude) coordinate.
     '''
-    geocoder_params['address'] = address
-    res = requests.get(geocoder, params=geocoder_params)
-    res.raise_for_status()
-    coor = json.loads(requests.get(geocoder, params=geocoder_params).text)
-    print(coor)
-    if coor['status'] == 0:
-        location = coor['result']['location']
-        return (location['lng'], location['lat'])
-    else:
-        return None
+    for address in addresses:
+        geocoder_params['address'] = address
+        res = requests.get(geocoder, params=geocoder_params)
+        res.raise_for_status()
+        coor = json.loads(requests.get(geocoder, params=geocoder_params).text)
+        # print(coor)
+        if coor['status'] == 0:
+            location = coor['result']['location']
+            yield (location['lng'], location['lat'])
+        else:
+            raise ConvertFailure
 
 
 if __name__ == '__main__':
 
-    cor = addr2corr("天安门")
-    print("cor = ", cor)
+    address_list = ["天安门", "故宫", "奥林匹克公园", "广州塔"]
+    cor = addr2corr(address_list)
+    for item in cor:
+        print(item)
