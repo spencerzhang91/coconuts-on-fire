@@ -92,7 +92,7 @@ def addr2coor(addresses: str)->tuple:
             raise ConvertFailure
 
 
-def rescounter(resnum: int)->tuple:
+def rescounter(function)->tuple:
     """A addr2coor wraper"""
     pass
 
