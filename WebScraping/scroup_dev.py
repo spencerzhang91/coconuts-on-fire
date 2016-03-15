@@ -7,7 +7,7 @@
 import requests, bs4, csv
 import datetime
 import time
-import psycopg2
+# import psycopg2
 
 class CSVfileNameError(Exception):
     def __str__(self):
@@ -74,12 +74,12 @@ def getGroupName(soup:bs4.BeautifulSoup)->str:
                             > div[class="title"] > a')[0].getText()
     return groupname
 
-def startOperation(init_url:str, pages:int, filename:str, headers:dict):
+def startOperation(init_url:str, pages:int, filename:str):
     '''
     type init_url: str
     rtype: None
     '''
-    num = 0
+    num = 22630
     error_counter = 0
     perpage = 25
     failure_urls = []
@@ -94,10 +94,10 @@ def startOperation(init_url:str, pages:int, filename:str, headers:dict):
     writer = csv.writer(file)
     for i in range(pages):
         url = init_url + str(num + perpage * i)
-        # time.sleep(0.1)
+        time.sleep(1)
         res = requests.get(url, headers=headers)
         if res.status_code != 200:
-            print('403!')
+            print('Caught by Douban keeper!')
             break
         try:
             res.raise_for_status()
@@ -128,7 +128,7 @@ def startOperation(init_url:str, pages:int, filename:str, headers:dict):
                                  urls[j]['href']])
 
                 # detect if target appeared
-                result = hasAuthor('spencer', authors[j])  
+                result = hasAuthor('Tosaturday', authors[j])
             except Exception as e:
                 print('Error occured on page %d line %d' % (i+1, j+1))
                 print(*[titles[j].getText(), authors[j].getText()])
@@ -194,15 +194,15 @@ if __name__ == '__main__':
                 'http://www.douban.com/group/kaopulove/discussion?start=',
                 'http://www.douban.com/group/wexin/discussion?start=',
                 'https://www.douban.com/group/yuexiuzufang/discussion?start=',
-                'https://www.douban.com/group/gz020/discussion?start=']
+                'https://www.douban.com/group/gz020/discussion?start=',
+                'https://www.douban.com/group/spoil/discussion?start=']
     
-    url = url_list[2]
-    pgm = 2
-    fln = "gzzufang.csv"
-    header = {}
+    url = url_list[6]
+    pgm = 1435
+    fln = "Tosaturday.csv"
     # url, pgm, fln = initialization()
     start = time.clock()
-    failures = startOperation(url, pgm, fln, header)
+    failures = startOperation(url, pgm, fln)
     if failures:
         print('[The urls below occured problem]:')
         for item in failures:
