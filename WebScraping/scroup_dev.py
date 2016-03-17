@@ -171,6 +171,9 @@ def searchDate(date:str, groups:list)->list:
     '''
     raise NotImplementedError
 
+def getPages(url:str):
+    raise NotImplementedError
+
 """
 def insertData(row:list):
     '''
