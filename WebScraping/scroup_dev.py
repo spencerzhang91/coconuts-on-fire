@@ -74,12 +74,21 @@ def getGroupName(soup:bs4.BeautifulSoup)->str:
                             > div[class="title"] > a')[0].getText()
     return groupname
 
-def startOperation(init_url:str, pages:int, filename:str):
+def startOperation(init_url:str, pages:int=None, filename:str):
     '''
     type init_url: str
     rtype: None
     '''
-    num = 22630
+    if not pages:
+        try:
+            pages = getPages(init_url)
+        except Exception as e:
+            print("Exception occured:")
+            print(e)
+            print("Set page number to default 5 pages.")
+            pages = 5
+
+    start_page = 22630
     error_counter = 0
     perpage = 25
     failure_urls = []
@@ -93,7 +102,7 @@ def startOperation(init_url:str, pages:int, filename:str):
                 encoding='utf8')
     writer = csv.writer(file)
     for i in range(pages):
-        url = init_url + str(num + perpage * i)
+        url = init_url + str(start_page + perpage * i)
         time.sleep(1)
         res = requests.get(url, headers=headers)
         if res.status_code != 200:
@@ -128,7 +137,7 @@ def startOperation(init_url:str, pages:int, filename:str):
                                  urls[j]['href']])
 
                 # detect if target appeared
-                result = hasAuthor('Tosaturday', authors[j])
+                result = hasAuthor('ToSaturday', authors[j])
             except Exception as e:
                 print('Error occured on page %d line %d' % (i+1, j+1))
                 print(*[titles[j].getText(), authors[j].getText()])
@@ -171,8 +180,15 @@ def searchDate(date:str, groups:list)->list:
     '''
     raise NotImplementedError
 
-def getPages(url:str):
-    raise NotImplementedError
+def getPages(url:str, headers=headers):
+    """
+    This function gets total page number of a group discussion.
+
+    """
+    res = requests.get(url, headers=headers)
+    psoup = bs4.BeautifulSoup(res.text, 'lxml')
+    
+    
 
 """
 def insertData(row:list):
@@ -192,13 +208,15 @@ def insertData(row:list):
 
 if __name__ == '__main__':
     # The following is for development test:
+    # TODO: change url_list into url dictionary
     url_list = ['https://www.douban.com/group/tianhezufang/discussion?start=',
                 'http://www.douban.com/group/gz020/discussion?start=',
                 'http://www.douban.com/group/kaopulove/discussion?start=',
                 'http://www.douban.com/group/wexin/discussion?start=',
                 'https://www.douban.com/group/yuexiuzufang/discussion?start=',
                 'https://www.douban.com/group/gz020/discussion?start=',
-                'https://www.douban.com/group/spoil/discussion?start=']
+                'https://www.douban.com/group/spoil/discussion?start=',
+                'https://www.douban.com/group/chen19891018/discussion?start=']
     
     url = url_list[6]
     pgm = 1435
