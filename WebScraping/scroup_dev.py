@@ -187,6 +187,10 @@ def getPages(url:str, headers=headers):
     """
     res = requests.get(url, headers=headers)
     psoup = bs4.BeautifulSoup(res.text, 'lxml')
+    # the line below need to be validated. The needed message is in html tag
+    # attribute value, the problem is how to extract it properly.
+    total_page = psoup.select('div[class="paginator"] > span')['data-total-page']
+    return total_page
     
     
 
