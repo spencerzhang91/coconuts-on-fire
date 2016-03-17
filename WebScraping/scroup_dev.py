@@ -89,6 +89,14 @@ def startOperation(init_url:str, pages:int=None, filename:str='TESTCSV'):
                "Connection": "keep-alive"
                }
     proxies = {'http':'http://192.99.246.183:9000'}
+    # operation config
+    start_page = 0
+    error_counter = 0
+    perpage = 25
+    failure_urls = []
+    file = open(r'C:\Users\spencer\Desktop\%s' % filename, 'w', newline='',
+                encoding='utf8')
+    writer = csv.writer(file)
     if not pages:
         try:
             pages = getPages(init_url+'0', headers)
@@ -97,24 +105,12 @@ def startOperation(init_url:str, pages:int=None, filename:str='TESTCSV'):
             print(e)
             print("Set page number to default 5 pages.")
             pages = 5
-
-    start_page = 0
-    error_counter = 0
-    perpage = 25
-    failure_urls = []
-    file = open(r'C:\Users\spencer\Desktop\%s' % filename, 'w', newline='',
-                encoding='utf8')
-    writer = csv.writer(file)
-    print("pages:", pages)
+    print("Total pages to be scraped:", pages)
     for i in range(pages):
         url = init_url + str(start_page + perpage * i)
         time.sleep(1)
-        res = requests.get(url, headers=headers)
-        if res.status_code != 200:
-            print('Caught by Douban keeper!')
-            break
         try:
-            res.raise_for_status()
+            res = requests.get(url, headers=headers)
         except Exception as e:
             print('There is a problem:', e)
             print('Waiting 10 seconds to recover...')
@@ -220,22 +216,22 @@ def insertData(row:list):
 
 if __name__ == '__main__':
     # The following is for development test:
-    # TODO: change url_list into url dictionary
-    url_list = ['https://www.douban.com/group/tianhezufang/discussion?start=',
-                'http://www.douban.com/group/gz020/discussion?start=',
-                'http://www.douban.com/group/kaopulove/discussion?start=',
-                'http://www.douban.com/group/wexin/discussion?start=',
-                'https://www.douban.com/group/yuexiuzufang/discussion?start=',
-                'https://www.douban.com/group/gz020/discussion?start=',
-                'https://www.douban.com/group/spoil/discussion?start=',
-                'https://www.douban.com/group/chen19891018/discussion?start=']
+
+    base = 'https://www.douban.com/group/'
+    url_dict = {'thzf': base + 'tianhezufang/discussion?start=',
+                'gzzf': base + 'gz020/discussion?start=',
+                'kplv': base + 'kaopulove/discussion?start=',
+                'weixin': base + 'wexin/discussion?start=',
+                'spoil': base + 'spoil/discussion?start=',
+                'chen': base + 'chen19891018/discussion?start='}
     
-    url = url_list[6]
-    # pgm = 1435
-    fln = "ToSaturday.csv"
-    # url, pgm, fln = initialization()
+    url = url_dict['chen']
+    pgm = 10
+    stamp = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
+    fln = 'testrun_%s.csv' % stamp
+
     start = time.clock()
-    failures = startOperation(url, filename=fln)
+    failures = startOperation(url, pages=pgm, filename=fln)
     if failures:
         print('[The urls below occured problem]:')
         for item in failures:
