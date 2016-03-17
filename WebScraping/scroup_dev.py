@@ -16,6 +16,10 @@ class CSVfileNameError(Exception):
 class WrongURL(Exception):
     def __str__(self):
         return 'Invalid url input, input should be valid url of douban group.'
+
+class NoPageNumber(Exception):
+    def __str__(self):
+        return 'Failed to get total group topic page numbers.'
     
 def showfunc(l1, l2, l3, l4):
     '''
@@ -81,7 +85,7 @@ def startOperation(init_url:str, pages:int=None, filename:str):
     '''
     if not pages:
         try:
-            pages = getPages(init_url)
+            pages = getPages(init_url+'0')
         except Exception as e:
             print("Exception occured:")
             print(e)
@@ -189,8 +193,11 @@ def getPages(url:str, headers=headers):
     psoup = bs4.BeautifulSoup(res.text, 'lxml')
     # the line below need to be validated. The needed message is in html tag
     # attribute value, the problem is how to extract it properly.
-    total_page = psoup.select('div[class="paginator"] > span')['data-total-page']
-    return total_page
+    paginator_list = psoup.select('div[class="paginator"] > span')
+    if paginator_list:
+        return int(paginator_list[1]['data-total-page'])
+    else:
+        raise NoPageNumber
     
     
 
