@@ -78,33 +78,34 @@ def getGroupName(soup:bs4.BeautifulSoup)->str:
                             > div[class="title"] > a')[0].getText()
     return groupname
 
-def startOperation(init_url:str, pages:int=None, filename:str):
+def startOperation(init_url:str, pages:int=None, filename:str='TESTCSV'):
     '''
     type init_url: str
     rtype: None
     '''
-    if not pages:
-        try:
-            pages = getPages(init_url+'0')
-        except Exception as e:
-            print("Exception occured:")
-            print(e)
-            print("Set page number to default 5 pages.")
-            pages = 5
-
-    start_page = 22630
-    error_counter = 0
-    perpage = 25
-    failure_urls = []
     # proxy config
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) "
                                                 "Gecko/20100101 Firefox/43.0",
                "Connection": "keep-alive"
                }
     proxies = {'http':'http://192.99.246.183:9000'}
+    if not pages:
+        try:
+            pages = getPages(init_url+'0', headers)
+        except Exception as e:
+            print("Exception occured:")
+            print(e)
+            print("Set page number to default 5 pages.")
+            pages = 5
+
+    start_page = 0
+    error_counter = 0
+    perpage = 25
+    failure_urls = []
     file = open(r'C:\Users\spencer\Desktop\%s' % filename, 'w', newline='',
                 encoding='utf8')
     writer = csv.writer(file)
+    print("pages:", pages)
     for i in range(pages):
         url = init_url + str(start_page + perpage * i)
         time.sleep(1)
@@ -184,7 +185,7 @@ def searchDate(date:str, groups:list)->list:
     '''
     raise NotImplementedError
 
-def getPages(url:str, headers=headers):
+def getPages(url:str, headers:dict):
     """
     This function gets total page number of a group discussion.
 
@@ -230,11 +231,11 @@ if __name__ == '__main__':
                 'https://www.douban.com/group/chen19891018/discussion?start=']
     
     url = url_list[6]
-    pgm = 1435
-    fln = "Tosaturday.csv"
+    # pgm = 1435
+    fln = "ToSaturday.csv"
     # url, pgm, fln = initialization()
     start = time.clock()
-    failures = startOperation(url, pgm, fln)
+    failures = startOperation(url, filename=fln)
     if failures:
         print('[The urls below occured problem]:')
         for item in failures:
