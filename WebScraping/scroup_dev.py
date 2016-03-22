@@ -224,20 +224,20 @@ if __name__ == '__main__':
                 'weixin': base + 'wexin/discussion?start=',
                 'spoil': base + 'spoil/discussion?start=',
                 'chen': base + 'chen19891018/discussion?start='}
-    
-    url = url_dict['chen']
-    pgm = 10
-    stamp = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
-    fln = 'testrun_%s.csv' % stamp
-
     start = time.clock()
-    failures = startOperation(url, pages=pgm, filename=fln)
-    if failures:
-        print('[The urls below occured problem]:')
-        for item in failures:
-            print(item)
-    else:
-        print('All pages successfully scraped!')
+    for value in url_dict.values():
+        
+        stamp = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
+        fln = 'testrun_%s.csv' % stamp
+
+    
+        failures = startOperation(value, filename=fln)
+        if failures:
+            print('[The urls below occured problem]:')
+            for item in failures:
+                print(item)
+        else:
+            print('All pages successfully scraped!')
     end = time.clock()
     total_time = end - start
     m , s = divmod(total_time, 60)

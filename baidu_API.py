@@ -1,3 +1,4 @@
+#!python3
 """
 A simple script that uses Baidu Place API to search certain kinds of place
 in a range of circular space.
