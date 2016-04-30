@@ -120,6 +120,8 @@ def startOperation(init_url:str, pages:int=None, filename:str='TESTCSV'):
     
         soup = bs4.BeautifulSoup(res.text, 'lxml')
         print('Scraping page %d...' % (i+1))
+        # The following five lines of code are fragile if the author of web page
+        # changes structure. Need to rewrite it in a more flexible way.
         titles = soup.select('tr[class] > td[class="title"] > a[class=""]')
         authors = soup.select('tr[class] > td[nowrap="nowrap"] > a[class=""]')
         follows = soup.select('tr[class] > td[class=""]')
