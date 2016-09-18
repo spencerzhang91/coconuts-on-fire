@@ -1,7 +1,7 @@
 # coconuts-on-fire
 ================
 
-It's my *first* repository and also a very start to become a programmer and data scientist.
+It's my *first* repository, all sorts of fancy/funky ideas.
 **Basicly it's the room of requirement**
 
-This repo is now consist of multiple folders, eventually *(maybe some day in the middle of 2016)* they would be parted from this big repo.
+This repo is now consist of multiple folders, eventually *(maybe some day in the end of 2016)* they would be parted from this big repo.
