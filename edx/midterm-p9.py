@@ -3,16 +3,12 @@ def flatten(aList):
     aList: a list 
     Returns a copy of aList, which is a flattened version of aList 
     '''
-    copyList = []
+    if not aList:
+        return []
     for item in aList:
         if type(item) != list:
-            copyList.append(item)
+            return [item] + flatten(aList[1:])
         else:
-            return flatten(item)
-    return copyList
+            return flatten(item) + flatten(aList[1:])
 
-List = [[1,'a',['cat'],2],[[[3]],'dog'],4,5]
-flattened = flatten(List)
 
-print(List)
-print(flattened)
