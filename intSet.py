@@ -29,3 +29,16 @@ class intSet(object):
         """Returns a string representation of self"""
         self.vals.sort()
         return '{' + ','.join([str(e) for e in self.vals]) + '}'
+
+    def __len__(self):
+        """Returns an integer that shows the length of intSet instance"""
+        return len(self.vals)
+
+    def intersect(self, other):
+        """Returns a new intSet that contains the common elements of self and other"""
+        newSet = intSet()
+        for item in self.vals:
+            if other.member(item):
+                newSet.insert(item)
+        return newSet
+
