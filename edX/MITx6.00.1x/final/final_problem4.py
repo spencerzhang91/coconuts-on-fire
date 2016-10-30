@@ -34,11 +34,15 @@ def longest_run(L):
                     decrease = []
                 i = j - 1
                 break
-    # print(L, len(L), longest, j)
+    print(L, len(L), longest, j)
     return sum(longest)
 
 l1 = [3, 3, 3, 3, 3]
-l8 = [3, 2, -1, 2, 7]
+l2 = [3, 2, -1, 2, 7]
+l3 = [100, 200, 300, -100, -200, -1500, -5000]
+l4 = [3, 3, 3, 3, 3, 3, 3, -10, 1, 2, 3, 4]
 
 print(longest_run(l1))
-print(longest_run(l8))
+print(longest_run(l2))
+print(longest_run(l3))
+print(longest_run(l4))
