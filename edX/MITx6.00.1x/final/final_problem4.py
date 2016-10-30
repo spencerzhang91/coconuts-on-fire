@@ -9,13 +9,25 @@ def longest_run(L):
     Returns the sum of the longest run. 
     """
     longest = []
+    increasing = None
+    # main for loop
     for i in range(len(L) - 1):
-        if L[i] <= L[i+1]:
-            increasing = True
-            increase = [L[i]]
-        else:
-            increasing = False
-            decrease = [L[i]]
+        # this for loop decides if current run is increasing
+        for j in range(i+1, len(L)):
+            if L[j] == L[j-1]:
+                continue
+            elif L[j] > L[j-1]:
+                increasing = True
+                increase = [L[i]]
+                break
+            else:
+                increasing = False
+                decrease = [L[i]]
+                break
+        if increasing == None:
+            if len(L[i:]) > len(longest):
+                return sum(L[i:])
+        # this for loop actually adds items in respective list
         for j in range(i+1, len(L)):
             if L[j] >= L[j-1] and increasing:
                 increase.append(L[j])
@@ -34,7 +46,7 @@ def longest_run(L):
                     decrease = []
                 i = j - 1
                 break
-    print(L, len(L), longest, j)
+    # print(L, len(L), longest, j)
     return sum(longest)
 
 l1 = [3, 3, 3, 3, 3]
