@@ -17,10 +17,16 @@ def longest_run(L):
             increasing = False
             decrease = [L[i]]
         for j in range(i+1, len(L)):
-            if L[j] >= L[j-1] and increasing:
+            if L[j] >= L[j-1] and increasing and j < len(L) - 1:
                 increase.append(L[j])
-            elif L[j] <= L[j-1] and not increasing:
+                if j == len(L) - 1:
+                    print("hh")
+                    return sum(increase)
+            elif L[j] <= L[j-1] and not increasing and j < len(L) - 1:
                 decrease.append(L[j])
+                if j == len(L) - 1:
+                    print("hs")
+                    return sum(decrease)
             else:
                 if increasing and len(increase) > len(longest):
                     longest = increase[:]
@@ -30,10 +36,11 @@ def longest_run(L):
                     decrease = []
                 i = j - 1
                 break
-    # print(longest)
+    print(L, len(L), longest, j)
     return sum(longest)
 
-L = [10, 4, 3, 8, 3, 4, 5, 7, 7, 2]
-result = longest_run(L)
-print(result)
-            
+l1 = [3, 3, 3, 3, 3]
+l8 = [3, 2, -1, 2, 7]
+
+print(longest_run(l1))
+print(longest_run(l8))
