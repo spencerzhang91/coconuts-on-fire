@@ -1,4 +1,5 @@
 #! /usr/local/bin/python3
+# can not be used on windows due to line end difference.
 import pip
 import re
 from subprocess import check_output, call
