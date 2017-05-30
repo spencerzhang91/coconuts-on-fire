@@ -3,7 +3,11 @@
 class Spam:
     numInstances = 0
     def __init__(self):
-        Spam.numInstances += 1
+        self.count()
+
+    def count(cls):
+        cls.numInstances += 1
+    count = classmethod(count)
 
     def print1(self):
         print('Instance method: %d' % Spam.numInstances)
@@ -36,14 +40,9 @@ if __name__ == '__main__':
     x = Sub()
     y = Spam()
     # test calls below:
-    x.print4()
-    Sub.print4()
+    print(x.numInstances, y.numInstances, Sub.numInstances)
     y.print4()
-
-    z = Other()
-    z.print4()
-
-
+    x.print4()
 """
 Extra stuff... <class '__main__.Sub'>
 Number of instances: 2 <class '__main__.Spam'>
