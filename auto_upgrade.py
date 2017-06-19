@@ -4,8 +4,9 @@ import pip
 import re
 from subprocess import check_output, call
 
-output = check_output(['pip3', 'list', '--outdated'])
+output = check_output(['pip3', 'list', '--outdated']) # Now this line fails, why?
 outdated = re.findall('^(?=b)\S+(?= \(\w+)|(?<=\\\\n)\S+(?= \(\w+)', str(output))
+print('hh')
 if not outdated:
     print('Everything is up to date.')
 else:
